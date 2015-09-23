@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DomainModels
+namespace MasonOgCRM.DomainModels
 {
 	/// <summary>
 	/// Represents a customer, the main data in the application.
