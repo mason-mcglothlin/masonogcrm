@@ -11,27 +11,32 @@ namespace MasonOgCRM.DataAccess.InMemory
 {
 	public class InMemoryRepository : IOgCRMRepository
 	{
-		private Dictionary<int, Customer> Customers { get; set; } = new Dictionary<int, Customer>();
+		private Dictionary<int, Customer> Customers { get; } = new Dictionary<int, Customer>();
 
-		private Dictionary<int, Note> Notes { get; set; } = new Dictionary<int, Note>();
+		private Dictionary<int, Note> Notes { get; } = new Dictionary<int, Note>();
 
-		private Dictionary<int, UserAccount> UserAccounts = new Dictionary<int, UserAccount>();
+		private Dictionary<int, UserAccount> UserAccounts { get; } = new Dictionary<int, UserAccount>();
+
+		private Random randomNumberGenerator { get; } = new Random(Int32.MaxValue);
 
 
 		public Task AddCustomerAsync(Customer customer)
 		{
+			customer.Id = randomNumberGenerator.Next();
 			Customers.Add(customer.Id, customer);
 			return Task.FromResult(0);
 		}
 
 		public Task AddNoteAsync(Note note)
 		{
+			note.Id = randomNumberGenerator.Next();
 			Notes.Add(note.Id, note);
 			return Task.FromResult(0);
 		}
 
 		public Task AddUserAccountAsync(UserAccount userAccount)
 		{
+			userAccount.Id = randomNumberGenerator.Next();
 			UserAccounts.Add(userAccount.Id, userAccount);
 			return Task.FromResult(0);
 		}
