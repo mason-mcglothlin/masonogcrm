@@ -26,7 +26,9 @@ Use TypeScript instead of JavaScript. May need to investigate to see if a tool e
 
 Document tools used and describe experience level and why I chose those tools. Visual Studio Community 2015, TortoiseGit, HP Omen.
 
-Need to pick a client side CSS framework. Probably Bootstrap. But what theme? Maybe stick with default theme just to get the application built, then towards the end experiment with a LOB-themed design.
+Utilize async for scaling and/or performance.
+
+Need to pick a client side CSS framework. Probably Bootstrap. But what theme? Maybe stick with default theme just to get the application built, then towards the end experiment with a LOB-themed design. Perhaps [Supr](http://themes.suggelab.com/supr/).
 
 # Authentication
 Use Identity? Pro: built in VS support and works well with EF. Has built in tools for password hashing, auto account lockout etc. Con: requires lot of code and domain models, which may be overkill for this project.
