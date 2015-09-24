@@ -20,6 +20,20 @@ namespace MasonOgCRM.DataAccess.EF
 		public EFDBContext(string connectionString): base(connectionString) { }
 
 		/// <summary>
+		/// Configure EF model primary and foreign keys by overriding DbContext.OnModelCreating
+		/// </summary>
+		/// <remarks>
+		/// Since the entities are in an entirely separate class library that does not reference EF, this method uses the EF Fluent API to configure the relationships between entities.
+		/// </remarks>
+		/// <param name="modelBuilder"></param>
+		protected override void OnModelCreating(DbModelBuilder modelBuilder)
+		{
+			modelBuilder.Entity<Customer>().HasKey(customer => customer.Id);
+			modelBuilder.Entity<Note>().HasKey(note => note.Id);
+			modelBuilder.Entity<UserAccount>().HasKey(userAccount => userAccount.Id);
+		}
+
+		/// <summary>
 		/// Object to call methods against for interacting with Customer objects in the database.
 		/// </summary>
 		public DbSet<Customer> Customers { get; set; }
