@@ -117,12 +117,13 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Global.asax" />
+    <Content Include="index.html" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ApiControllers\CustomerApiController.cs" />
+    <Compile Include="ApiControllers\CustomersController.cs" />
     <Compile Include="App_Start\NinjectWebCommon.cs" />
-    <Compile Include="App_Start\WebApiConfiguration.cs" />
+    <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -137,6 +138,10 @@
     <ProjectReference Include="..\DataAccess.EFRepository\DataAccess.EF.csproj">
       <Project>{7fb2a19e-9e6e-4f74-9eb5-1583a8fad741}</Project>
       <Name>DataAccess.EF</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DataAccess.InMemory\DataAccess.InMemory.csproj">
+      <Project>{8b72f4b6-b547-4601-aab9-88274e02f52d}</Project>
+      <Name>DataAccess.InMemory</Name>
     </ProjectReference>
     <ProjectReference Include="..\DomainModels\DomainModels.csproj">
       <Project>{981bfa4a-3bd1-4d7d-84e9-52c9aab15bdf}</Project>

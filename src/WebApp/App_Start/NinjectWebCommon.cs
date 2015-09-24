@@ -7,6 +7,7 @@ namespace MasonOgCRM.WebApp.App_Start
 	using System.Web;
 	using DataAccess.Common;
 	using DataAccess.EF;
+	using DataAccess.InMemory;
 	using Microsoft.Web.Infrastructure.DynamicModuleHelper;
 	using Ninject;
 	using Ninject.Web.Common;
@@ -60,12 +61,8 @@ namespace MasonOgCRM.WebApp.App_Start
 		/// <param name="kernel">The kernel.</param>
 		private static void RegisterServices(IKernel kernel)
 		{
-			var connectionString = "";
-			if (String.IsNullOrEmpty(connectionString))
-			{
-				throw new NotImplementedException("connectionString for Entity Framework repository not yet configured.");
-			}
-			kernel.Bind<IOgCRMRepository>().ToMethod((IContext) => new EntityFrameworkRepository(connectionString));
+			kernel.Bind<IOgCRMRepository>().To<InMemoryRepository>().InSingletonScope();
+			//kernel.Bind<IOgCRMRepository>().ToMethod((IContext) => new EntityFrameworkRepository(connectionString));
 		}
 	}
 }

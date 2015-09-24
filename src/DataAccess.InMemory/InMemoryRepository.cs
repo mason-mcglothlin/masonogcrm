@@ -56,47 +56,65 @@ namespace MasonOgCRM.DataAccess.InMemory
 
 		public Task<Customer> FindCustomerByIdAsync(int id)
 		{
-			return new Task<Customer>(() => Customers[id]);
+			var t = new Task<Customer>(() => Customers[id]);
+			t.Start();
+			return t;
 		}
 
 		public Task<Note> FindNoteByIdAsync(int id)
 		{
-			return new Task<Note>(() => Notes[id]);
+			var t = new Task<Note>(() => Notes[id]);
+			t.Start();
+			return t;
 		}
 
 		public Task<UserAccount> FindUserAccountByIdAsync(int id)
 		{
-			return new Task<UserAccount>(() => UserAccounts[id]);
+			var t = new Task<UserAccount>(() => UserAccounts[id]);
+			t.Start();
+			return t;
 		}
 
 		public Task<List<Customer>> GetAllCustomersAsync()
 		{
-			return new Task<List<Customer>>(() => Customers.Values.ToList());
+			var t = new Task<List<Customer>>(() => Customers.Values.ToList());
+			t.Start();
+			return t;
 		}
 
 		public Task<List<Customer>> GetAllCustomersAsync(Expression<Func<Customer, bool>> expression)
 		{
-			return new Task<List<Customer>>( () => Customers.Values.AsQueryable().Where(expression).ToList());
+			var t = new Task<List<Customer>>( () => Customers.Values.AsQueryable().Where(expression).ToList());
+			t.Start();
+			return t;
 		}
 
 		public Task<List<Note>> GetAllNotesAsync()
 		{
-			return new Task<List<Note>>(() => Notes.Values.ToList());
+			var t = new Task<List<Note>>(() => Notes.Values.ToList());
+			t.Start();
+			return t;
 		}
 
 		public Task<List<Note>> GetAllNotesAsync(Expression<Func<Note, bool>> expression)
 		{
-			return new Task<List<Note>>(() => Notes.Values.AsQueryable().Where(expression).ToList());
+			var t = new Task<List<Note>>(() => Notes.Values.AsQueryable().Where(expression).ToList());
+			t.Start();
+			return t;
 		}
 
 		public Task<List<UserAccount>> GetAllUserAccountsAsync()
-		{
-			return new Task<List<UserAccount>>(() => UserAccounts.Values.ToList());
+		{			
+			var t = new Task<List<UserAccount>>(() => UserAccounts.Values.ToList());
+			t.Start();
+			return t;
 		}
 
 		public Task<List<UserAccount>> GetAllUserAccountsAsync(Expression<Func<UserAccount, bool>> expression)
 		{
-			return new Task<List<UserAccount>>(() => UserAccounts.Values.AsQueryable().Where(expression).ToList());
+			var t = new Task<List<UserAccount>>(() => UserAccounts.Values.AsQueryable().Where(expression).ToList());
+			t.Start();
+			return t;
 		}
 
 		public Task UpdateCustomerAsync(Customer customer)

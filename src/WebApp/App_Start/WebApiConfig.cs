@@ -8,11 +8,13 @@ using System.Web.Routing;
 
 namespace MasonOgCRM.WebApp.App_Start
 {
-	public static class WebApiConfiguration
+	public static class WebApiConfig
 	{
-		public static void ConfigureWebApi()
+		public static void Register(HttpConfiguration config)
 		{
-			RouteTable.Routes.MapHttpRoute(
+			config.MapHttpAttributeRoutes();
+
+			config.Routes.MapHttpRoute(
 				name: "DefaultApi",
 				routeTemplate: "api/{controller}/{id}",
 				defaults: new { id = RouteParameter.Optional }
