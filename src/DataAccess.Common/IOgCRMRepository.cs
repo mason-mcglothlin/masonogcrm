@@ -31,7 +31,7 @@ namespace MasonOgCRM.DataAccess.Common
 		/// </summary>
 		/// <param name="expression">Expression that returns true for Customer objects to retrieve.</param>
 		/// <returns></returns>
-		Task<List<Customer>> GetAllCustomersAsync(Expression<Func<bool>> expression);
+		Task<List<Customer>> GetAllCustomersAsync(Expression<Func<Customer, bool>> expression);
 
 		/// <summary>
 		/// Remove a customer from the repository.
@@ -72,7 +72,7 @@ namespace MasonOgCRM.DataAccess.Common
 		/// </summary>
 		/// <param name="expression"></param>
 		/// <returns></returns>
-		Task<List<UserAccount>> GetAllUserAccountsAsync(Expression<Func<bool>> expression);
+		Task<List<UserAccount>> GetAllUserAccountsAsync(Expression<Func<UserAccount, bool>> expression);
 
 		/// <summary>
 		/// Remove a user account from the repository.
@@ -113,7 +113,7 @@ namespace MasonOgCRM.DataAccess.Common
 		/// </summary>
 		/// <param name="expression">Expression that returns true for Customer objects to retrieve.</param>
 		/// <returns></returns>
-		Task<List<Note>> GetAllNotesAsync(Expression<Func<bool>> expression);
+		Task<List<Note>> GetAllNotesAsync(Expression<Func<Note, bool>> expression);
 
 		/// <summary>
 		/// Remove a note from the repository.
