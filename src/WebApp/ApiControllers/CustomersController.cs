@@ -19,31 +19,26 @@ namespace MasonOgCRM.WebApp.ApiControllers
 			Repository = repository;
 		}
 
-		// GET api/<controller>
 		public async Task<IEnumerable<Customer>> Get()
 		{
 			return await Repository.GetAllCustomersAsync();
 		}
 
-		// GET api/<controller>/5
 		public async Task<Customer> Get(int id)
 		{
 			return await Repository.FindCustomerByIdAsync(id);
 		}
 
-		// POST api/<controller>
 		public async Task Post([FromBody]Customer customer)
 		{
 			await Repository.AddCustomerAsync(customer);
 		}
 
-		// PUT api/<controller>
 		public async Task Put([FromBody]Customer customer)
 		{
 			await Repository.UpdateCustomerAsync(customer);
 		}
 
-		// DELETE api/<controller>/5
 		public async Task Delete(int id)
 		{
 			await Repository.DeleteCustomerAsync(id);
