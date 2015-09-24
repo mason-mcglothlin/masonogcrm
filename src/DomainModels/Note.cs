@@ -12,6 +12,11 @@ namespace MasonOgCRM.DomainModels
 	public class Note
 	{
 		/// <summary>
+		/// Unique Id to identify the Note.
+		/// </summary>
+		public int Id { get; set; }
+
+		/// <summary>
 		/// The main body of the note (text).
 		/// </summary>
 		public string Body { get; set; }

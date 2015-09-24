@@ -12,6 +12,11 @@ namespace MasonOgCRM.DomainModels
 	public class UserAccount
 	{
 		/// <summary>
+		/// Unique Id to identify the UserAccount.
+		/// </summary>
+		public int Id { get; set; }
+
+		/// <summary>
 		/// First name of the user.
 		/// </summary>
 		public string FirstName { get; set; }

@@ -11,6 +11,12 @@ namespace MasonOgCRM.DomainModels
 	/// </summary>
 	public class Customer
 	{
+
+		/// <summary>
+		/// Unique Id to identify the customer.
+		/// </summary>
+		public int Id {get; set;}
+
 		/// <summary>
 		/// First name of the customer.
 		/// </summary>
