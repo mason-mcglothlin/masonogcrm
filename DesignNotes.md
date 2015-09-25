@@ -18,6 +18,8 @@ Integrate [Lucene.Net](https://lucenenet.apache.org/) for searching the site. Pe
 
 For the customer location, show a Google or Bing Maps location. At least hyperlink the address to a Google Maps search.
 
+Get rid of separate page for adding customers (might keep it for no-JavaScript support). Instead, have it be a button the user clicks, and fade in a form for them to fill out. Perhaps have it automatically appear with #New
+
 Need database seed method.
 
 Use CDN's where possible for CSS and JS, but use bundling/minification for local content.
