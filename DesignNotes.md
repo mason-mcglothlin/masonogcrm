@@ -14,6 +14,8 @@ Provide username/password on login page for easy demo access.
 
 Use [Tether](http://github.hubspot.com/tether/) or similar to show info on client side, both Dev and Help.
 
+Configure repository to use generics to reduce redundant code.
+
 Integrate [Lucene.Net](https://lucenenet.apache.org/) for searching the site. Perhaps do like Terma Enterprise Search and use custom attributes to describe models.
 
 For the customer location, show a Google or Bing Maps location. At least hyperlink the address to a Google Maps search.

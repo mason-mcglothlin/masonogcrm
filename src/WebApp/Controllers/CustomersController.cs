@@ -33,5 +33,10 @@ namespace MasonOgCRM.WebApp.Controllers
 			await Repository.AddCustomerAsync(customer);
 			return RedirectToAction(nameof(CustomersController.Index));
 		}
+
+		public async Task<ActionResult> Details(int id)
+		{
+			return View(await Repository.FindCustomerByIdAsync(id));
+		}
 	}
 }
