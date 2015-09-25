@@ -28,6 +28,8 @@ Document tools used and describe experience level and why I chose those tools. V
 
 Utilize async for scaling and/or performance.
 
+Scan with tool such as W3C Validator to make sure markup is valid.
+
 Need to pick a client side CSS framework. Probably Bootstrap. But what theme? Maybe stick with default theme just to get the application built, then towards the end experiment with a LOB-themed design. Perhaps [Supr](http://themes.suggelab.com/supr/).
 
 # Authentication

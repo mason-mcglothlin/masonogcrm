@@ -1,0 +1,6 @@
+﻿/* Makes sure bootstrap navbar doesn't cover body content. */
+/* fix from http://stackoverflow.com/a/10336221/1139830 */
+body {
+  padding-top: 60px;
+}
+/* End fix for Bootstrap covering content */
