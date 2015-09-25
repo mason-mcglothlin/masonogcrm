@@ -9,29 +9,30 @@ using MasonOgCRM.DomainModels;
 
 namespace MasonOgCRM.WebApp.Controllers
 {
-	public class CustomersController : Controller
-	{
+    public class UserAccountController : Controller
+    {
 		private readonly IOgCRMRepository Repository;
 
-		public CustomersController(IOgCRMRepository repository)
+		public UserAccountController(IOgCRMRepository repository)
 		{
 			Repository = repository;
 		}
 
 		public async Task<ActionResult> Index()
-		{
-			return View(await Repository.GetAllCustomersAsync());
-		}
+        {			
+            return View(await Repository.GetAllUserAccountsAsync());
+        }
 
 		public ActionResult New()
 		{
 			return View();
 		}
 
-		public async Task<ActionResult> Create(Customer customer)
+		public async Task<ActionResult> Create(UserAccount account)
 		{
-			await Repository.AddCustomerAsync(customer);
-			return RedirectToAction(nameof(CustomersController.Index));
+			await Repository.AddUserAccountAsync(account);
+			return RedirectToAction(nameof(UserAccountController.Index));
 		}
-	}
+
+    }
 }
