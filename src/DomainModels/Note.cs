@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -14,16 +15,19 @@ namespace MasonOgCRM.DomainModels
 		/// <summary>
 		/// Unique Id to identify the Note.
 		/// </summary>
+		[DisplayName("Id")]
 		public int Id { get; set; }
 
 		/// <summary>
 		/// The main body of the note (text).
 		/// </summary>
+		[DisplayName("Body")]
 		public string Body { get; set; }
 
 		/// <summary>
 		/// This is the user that created the note.
 		/// </summary>
+		[DisplayName("Created By")]
 		public string CreatedByUser { get; set; }
 	}
 }
