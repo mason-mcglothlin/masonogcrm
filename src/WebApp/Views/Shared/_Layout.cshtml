@@ -18,12 +18,12 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="@Url.Action("Index","Home")">OgCRM</a>
+                <a class="navbar-brand" href="@Url.Action(nameof(HomeController.Index), nameof(HomeController).RemoveControllerFromName())">OgCRM</a>
             </div>
             <div id="navbar" class="collapse navbar-collapse">
                 <ul class="nav navbar-nav">
-                    <li><a href="@Url.Action("Index","Home")">Home</a></li>
-                    <li><a href="@Url.Action("Index","Customers")">Customers</a></li>
+                    <li><a href="@Url.Action(nameof(HomeController.Index), nameof(HomeController).RemoveControllerFromName())">Home</a></li>
+                    <li><a href="@Url.Action(nameof(CustomersController.Index), nameof(CustomersController).RemoveControllerFromName())">Customers</a></li>
                 </ul>
             </div>
         </div>

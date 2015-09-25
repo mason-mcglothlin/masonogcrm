@@ -28,7 +28,13 @@ Document tools used and describe experience level and why I chose those tools. V
 
 Utilize async for scaling and/or performance.
 
+Do a single Web Forms page (perhaps the user accounts list page?) to demonstrate Web Forms knowledge. Disable ViewState on it, set ClientIdMode to static, and investigate some of the newer Web Forms strongly typed model binding tools.
+
 Scan with tool such as W3C Validator to make sure markup is valid.
+
+Add export to PDF, Word, and vCard formats.
+
+Use [Favicon generator](http://www.favicon-generator.org/) to create nice favicons for all devices.
 
 Need to pick a client side CSS framework. Probably Bootstrap. But what theme? Maybe stick with default theme just to get the application built, then towards the end experiment with a LOB-themed design. Perhaps [Supr](http://themes.suggelab.com/supr/).
 

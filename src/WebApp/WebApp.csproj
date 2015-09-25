@@ -152,6 +152,7 @@
     <None Include="Properties\PublishProfiles\ogcrm - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\ogcrm - Web Deploy.pubxml" />
     <Content Include="Views\Customers\Index.cshtml" />
+    <Content Include="Views\Customers\New.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -166,6 +167,7 @@
   <ItemGroup>
     <Compile Include="ApiControllers\CustomersController.cs" />
     <Compile Include="App_Start\NinjectWebCommon.cs" />
+    <Compile Include="App_Start\RazorPageHelperExtensions.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\CustomersController.cs" />

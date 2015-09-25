@@ -5,11 +5,12 @@ using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using MasonOgCRM.DataAccess.Common;
+using MasonOgCRM.DomainModels;
 
 namespace MasonOgCRM.WebApp.Controllers
 {
-    public class CustomersController : Controller
-    {
+	public class CustomersController : Controller
+	{
 		private readonly IOgCRMRepository Repository;
 
 		public CustomersController(IOgCRMRepository repository)
@@ -17,9 +18,20 @@ namespace MasonOgCRM.WebApp.Controllers
 			Repository = repository;
 		}
 
-        public async Task<ActionResult> Index()
-        {
-            return View(await Repository.GetAllCustomersAsync());
-        }
-    }
+		public async Task<ActionResult> Index()
+		{
+			return View(await Repository.GetAllCustomersAsync());
+		}
+
+		public ActionResult New()
+		{
+			return View();
+		}
+
+		public async Task<ActionResult> Create(Customer customer)
+		{
+			await Repository.AddCustomerAsync(customer);
+			return RedirectToAction("Index");
+		}
+	}
 }
