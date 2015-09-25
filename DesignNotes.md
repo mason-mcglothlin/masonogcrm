@@ -32,6 +32,8 @@ Do a single Web Forms page (perhaps the user accounts list page?) to demonstrate
 
 Scan with tool such as W3C Validator to make sure markup is valid.
 
+Add option to import customer data from Excel using [EPPlus](http://epplus.codeplex.com/). Would be nice to drag and drop the Excel file, with fallback to regular file upload. Should probably do this in the background. Perhaps use [Hangfire](http://hangfire.io/). Probably try [QueueBackgroundWorkItem](http://blogs.msdn.com/b/webdev/archive/2014/06/04/queuebackgroundworkitem-to-reliably-schedule-and-run-long-background-process-in-asp-net.aspx) first because it won't require a database.
+
 Add export to PDF, Word, and vCard formats.
 
 Use [Favicon generator](http://www.favicon-generator.org/) to create nice favicons for all devices.
