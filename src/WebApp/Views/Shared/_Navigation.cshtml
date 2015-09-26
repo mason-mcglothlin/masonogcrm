@@ -1,0 +1,40 @@
+﻿<nav class="navbar-default navbar-static-side" role="navigation">
+    <div class="sidebar-collapse">
+        <ul class="nav" id="side-menu">
+            <li class="nav-header">
+                <div class="dropdown profile-element">
+                    <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+                        <span class="clear">
+                            <span class="block m-t-xs">
+                                <strong class="font-bold">Example user</strong>
+                            </span> <span class="text-muted text-xs block">Example menu <b class="caret"></b></span>
+                        </span>
+                    </a>
+                    <ul class="dropdown-menu animated fadeInRight m-t-xs">
+                        <li><a href="#">Logout</a></li>
+                    </ul>
+                </div>
+                <div class="logo-element">
+                    IN+
+                </div>
+            </li>
+            <li class="@Html.IsSelected(action: "Index")">
+                <a href="@Url.Action("Index", "Home")"><i class="fa fa-laptop"></i> <span class="nav-label">Home</span> </a>
+            </li>
+            <li class="@Html.IsSelected(controller: "Index")">
+                <a href="#"><i class="fa fa-male"></i> <span class="nav-label">Customers </span><span class="label label-warning pull-right">16/24</span></a>
+                <ul class="nav nav-second-level collapse">
+                    <li class="@Html.IsSelected(action: "Index")"><a href="@Url.Action("Index", "Customers")">All Customers</a></li>
+                    <li class="@Html.IsSelected(action: "New")"><a href="@Url.Action("New", "Customers")">New</a></li>
+                </ul>
+            </li>
+            <li class="@Html.IsSelected(controller: "UserAccount")">
+                <a href="#"><i class="fa fa-users"></i> <span class="nav-label">Accounts </span><span class="label label-warning pull-right">16/24</span></a>
+                <ul class="nav nav-second-level collapse">
+                    <li class="@Html.IsSelected(action: "Index")"><a href="@Url.Action("Index", "UserAccount")">All Accounts</a></li>
+                    <li class="@Html.IsSelected(action: "New")"><a href="@Url.Action("New", "UserAccount")">New</a></li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+</nav>
