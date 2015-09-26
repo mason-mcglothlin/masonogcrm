@@ -14,11 +14,18 @@ namespace MasonOgCRM.DataAccess.Common
 	public interface IOgCRMRepository
 	{
 		/// <summary>
-		/// Retrieve a Customer from the repository by Id.
+		/// Retrieve a Customer from the repository by Id asynchronously.
 		/// </summary>
 		/// <param name="id">Id of the customer to retrieve.</param>
 		/// <returns></returns>
 		Task<Customer> FindCustomerByIdAsync(int id);
+
+		/// <summary>
+		/// Retrieve a Customer from the repository by Id.
+		/// </summary>
+		/// <param name="id">Id of the customer to retrieve.</param>
+		/// <returns></returns>
+		Customer FindCustomerById(int id);
 
 		/// <summary>
 		/// Retrieve all Customer objects from the repository.

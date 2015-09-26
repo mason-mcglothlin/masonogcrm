@@ -28,7 +28,7 @@ namespace MasonOgCRM.DataAccess.EF
 		public EntityFrameworkRepository(string connectionString)
 		{
 			DBContext = new EFDBContext(connectionString);
-        }
+		}
 
 		/// <summary>
 		/// Add a customer to the repository.
@@ -100,13 +100,23 @@ namespace MasonOgCRM.DataAccess.EF
 		}
 
 		/// <summary>
-		/// Retrieve a Customer from the repository by Id.
+		/// Retrieve a Customer from the repository by Id asynchronously.
 		/// </summary>
 		/// <param name="id">Id of the customer to retrieve.</param>
 		/// <returns></returns>
 		public async Task<Customer> FindCustomerByIdAsync(int id)
 		{
 			return await DBContext.Customers.Where(customer => customer.Id == id).SingleAsync();
+		}
+
+		/// <summary>
+		/// Retrieve a Customer from the repository by Id.
+		/// </summary>
+		/// <param name="id">Id of the customer to retrieve.</param>
+		/// <returns></returns>
+		public Customer FindCustomerById(int id)
+		{
+			return DBContext.Customers.Where(customer => customer.Id == id).Single();
 		}
 
 		/// <summary>

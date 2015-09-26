@@ -66,6 +66,11 @@ namespace MasonOgCRM.DataAccess.InMemory
 			return t;
 		}
 
+		public Customer FindCustomerById(int id)
+		{
+			return Customers[id];
+		}
+
 		public Task<Note> FindNoteByIdAsync(int id)
 		{
 			var t = new Task<Note>(() => Notes[id]);
