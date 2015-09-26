@@ -19,21 +19,29 @@
                     OgCRM
                 </div>
             </li>
-            <li class="@Html.IsSelected(controller: "Home", action: "Index")">
-                <a href="@Url.Action("Index", "Home")"><i class="fa fa-home"></i> <span class="nav-label">Home</span> </a>
+            <li class="@Html.IsSelected(action: nameof(HomeController.Index), controller:nameof(HomeController).RemoveControllerFromName())">
+                <a href="@Url.Action(nameof(HomeController.Index), nameof(HomeController).RemoveControllerFromName())"><i class="fa fa-home"></i> <span class="nav-label">Home</span> </a>
             </li>
-            <li class="@Html.IsSelected(controller: "Customers")">
+            <li class="@Html.IsSelected(controller: nameof(CustomersController).RemoveControllerFromName())">
                 <a href="#"><i class="fa fa-male"></i> <span class="nav-label">Customers </span><span class="label label-warning pull-right">@Model.NumberOfCustomers</span></a>
                 <ul class="nav nav-second-level collapse">
-                    <li class="@Html.IsSelected(action: "Index")"><a href="@Url.Action("Index", "Customers")">All Customers</a></li>
-                    <li class="@Html.IsSelected(action: "New")"><a href="@Url.Action("New", "Customers")">New</a></li>
+                    <li class="@Html.IsSelected(action: nameof(CustomersController.Index), controller: nameof(CustomersController).RemoveControllerFromName())">
+                        <a href="@Url.Action(nameof(CustomersController.Index), nameof(CustomersController).RemoveControllerFromName())">All Customers</a>
+                    </li>
+                    <li class="@Html.IsSelected(action: nameof(CustomersController.New), controller: nameof(CustomersController).RemoveControllerFromName())">
+                        <a href="@Url.Action(nameof(CustomersController.New), nameof(CustomersController).RemoveControllerFromName())">New</a>
+                    </li>
                 </ul>
             </li>
-            <li class="@Html.IsSelected(controller: "UserAccount")">
+            <li class="@Html.IsSelected(controller: nameof(UserAccountController).RemoveControllerFromName())">
                 <a href="#"><i class="fa fa-users"></i> <span class="nav-label">Accounts </span><span class="label label-warning pull-right">@Model.NumberOfUserAccounts</span></a>
                 <ul class="nav nav-second-level collapse">
-                    <li class="@Html.IsSelected(action: "Index")"><a href="@Url.Action("Index", "UserAccount")">All Accounts</a></li>
-                    <li class="@Html.IsSelected(action: "New")"><a href="@Url.Action("New", "UserAccount")">New</a></li>
+                    <li class="@Html.IsSelected(action: nameof(UserAccountController.Index), controller: nameof(UserAccountController).RemoveControllerFromName())">
+                        <a href="@Url.Action(nameof(UserAccountController.Index), nameof(UserAccountController).RemoveControllerFromName())">All Accounts</a>
+                    </li>
+                    <li class="@Html.IsSelected(action: nameof(UserAccountController.New), controller: nameof(UserAccountController).RemoveControllerFromName())">
+                        <a href="@Url.Action(nameof(UserAccountController.New), nameof(UserAccountController).RemoveControllerFromName())">New</a>
+                    </li>
                 </ul>
             </li>
         </ul>
