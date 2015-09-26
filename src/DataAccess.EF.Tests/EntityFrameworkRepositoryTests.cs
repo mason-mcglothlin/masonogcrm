@@ -15,13 +15,14 @@ namespace DataAccess.EF.Tests
 	public class EntityFrameworkRepositoryTests
 	{
 		Mock<IDbContext> dbContext;
+		Mock<DbSet<Customer>> mockSet;
 		Customer mason;
 
 		[TestFixtureSetUp]
 		public void SetupDbContext()
 		{
 			dbContext = new Mock<IDbContext>();
-
+			
 			mason = new Customer { Id = 2, FirstName = "Mason", LastName = "McGlothlin", Address = "1 Washington Way", CompanyName = "Acme Inc", EmailAddress = "mason@compuserve.com", PhoneNumber = "555-555-5555" };
 
 			var sampleCustomerData = new List<Customer>
@@ -31,12 +32,14 @@ namespace DataAccess.EF.Tests
 				new Customer { Id = 3, FirstName = "Bobby", LastName = "Tables", Address = "XKCD Street", CompanyName = "Funny Stuff LLC", EmailAddress = "randall@xkcd.net", PhoneNumber = "214-555-5555" },
 			}.AsQueryable();
 
-			var mockSet = new Mock<DbSet<Customer>>();
+			mockSet = new Mock<DbSet<Customer>>();
 			mockSet.As<IQueryable<Customer>>().Setup(m => m.Provider).Returns(sampleCustomerData.Provider);
 			mockSet.As<IQueryable<Customer>>().Setup(m => m.Expression).Returns(sampleCustomerData.Expression);
 			mockSet.As<IQueryable<Customer>>().Setup(m => m.ElementType).Returns(sampleCustomerData.ElementType);
 			mockSet.As<IQueryable<Customer>>().Setup(m => m.GetEnumerator()).Returns(sampleCustomerData.GetEnumerator());
+			mockSet.Setup(c => c.Add(It.IsAny<Customer>())).Returns(new Customer()).Verifiable();
 			dbContext.Setup(c => c.Customers).Returns(mockSet.Object);
+			dbContext.Setup(c => c.SaveChanges()).Verifiable();
 		}
 
 		[Test]
@@ -57,6 +60,21 @@ namespace DataAccess.EF.Tests
 			Assert.AreEqual(mason.CompanyName, customer.CompanyName);
 			Assert.AreEqual(mason.EmailAddress, customer.EmailAddress);
 			Assert.AreEqual(mason.PhoneNumber, customer.PhoneNumber);
+		}
+		
+		[Test]
+		public void AddCustomer()
+		{
+			//Arrange
+			var repository = new EntityFrameworkRepository(dbContext.Object);
+			var customer = new Customer() { FirstName = "Larry", LastName = "Hughes" };
+
+			//Act
+			repository.AddCustomer(customer);
+
+			//Assert
+			mockSet.Verify(c => c.Add(It.IsAny<Customer>()));
+			dbContext.Verify(c => c.SaveChanges());
 		}
 	}
 }

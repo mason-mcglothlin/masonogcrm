@@ -28,7 +28,7 @@ namespace MasonOgCRM.DataAccess.EF
 		public EntityFrameworkRepository(IDbContext context)
 		{
 			DBContext = context;
-        }
+		}
 
 		/// <summary>
 		/// Add a customer to the repository.
@@ -39,6 +39,12 @@ namespace MasonOgCRM.DataAccess.EF
 		{
 			DBContext.Customers.Add(customer);
 			await DBContext.SaveChangesAsync();
+		}
+
+		public void AddCustomer(Customer customer)
+		{
+			DBContext.Customers.Add(customer);
+			DBContext.SaveChanges();
 		}
 
 		/// <summary>

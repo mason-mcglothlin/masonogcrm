@@ -15,6 +15,7 @@ namespace MasonOgCRM.DataAccess.EF
 		DbSet<Note> Notes { get; set; }
 		DbSet<UserAccount> UserAccounts { get; set; }
 		Task<int> SaveChangesAsync();
+		int SaveChanges();
 		DbEntityEntry<TEntity> Entry<TEntity>(TEntity entity) where TEntity : class;
     }
 }

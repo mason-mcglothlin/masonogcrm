@@ -15,6 +15,7 @@ namespace DataAccess.EF.Tests
 	public class EntityFrameworkRepositoryTestsAsync
 	{
 		Mock<IDbContext> dbContext;
+		Mock<DbSet<Customer>> mockSet;
 		Customer mason;
 
 		[TestFixtureSetUp]
@@ -31,7 +32,7 @@ namespace DataAccess.EF.Tests
 				new Customer { Id = 3, FirstName = "Bobby", LastName = "Tables", Address = "XKCD Street", CompanyName = "Funny Stuff LLC", EmailAddress = "randall@xkcd.net", PhoneNumber = "214-555-5555" },
 			}.AsQueryable();
 
-			var mockSet = new Mock<DbSet<Customer>>();
+			mockSet = new Mock<DbSet<Customer>>();
 			mockSet.As<IDbAsyncEnumerable<Customer>>()
 				.Setup(m => m.GetAsyncEnumerator())
 				.Returns(new TestDbAsyncEnumerator<Customer>(sampleCustomerData.GetEnumerator()));
@@ -45,6 +46,10 @@ namespace DataAccess.EF.Tests
 			mockSet.As<IQueryable<Customer>>().Setup(m => m.GetEnumerator()).Returns(sampleCustomerData.GetEnumerator());
 
 			dbContext.Setup(c => c.Customers).Returns(mockSet.Object);
+
+			mockSet.Setup(c => c.Add(It.IsAny<Customer>())).Returns(new Customer()).Verifiable();
+			
+			dbContext.Setup(c => c.SaveChangesAsync()).Verifiable();
 		}
 
 		[Test]
@@ -66,5 +71,20 @@ namespace DataAccess.EF.Tests
 			Assert.AreEqual(mason.EmailAddress, customer.EmailAddress);
 			Assert.AreEqual(mason.PhoneNumber, customer.PhoneNumber);
 		}
+
+		[Test]
+		public async Task AddCustomerAsync()
+		{
+			//Arrange
+			var repository = new EntityFrameworkRepository(dbContext.Object);
+			var customer = new Customer() { FirstName = "Larry", LastName = "Hughes" };
+
+			//Act
+			await repository.AddCustomerAsync(customer);
+
+			//Assert
+			dbContext.Verify(c => c.Customers.Add(It.IsAny<Customer>()));
+			dbContext.Verify(c => c.SaveChangesAsync());
+        }
 	}
 }
