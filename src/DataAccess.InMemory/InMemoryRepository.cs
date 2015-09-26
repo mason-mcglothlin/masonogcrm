@@ -38,6 +38,20 @@ namespace MasonOgCRM.DataAccess.InMemory
 			return Task.FromResult(0);
 		}
 
+		public Task<List<int>> GetAllCustomerIdsAsync()
+		{
+			var t = new Task<List<int>>(() => Customers.Keys.ToList());
+			t.Start();
+			return t;
+		}
+
+		public Task<List<int>> GetAllUserAccountIdsAsync()
+		{
+			var t = new Task<List<int>>(() => UserAccounts.Keys.ToList());
+			t.Start();
+			return t;
+		}
+
 		public Task AddUserAccountAsync(UserAccount userAccount)
 		{
 			userAccount.Id = randomNumberGenerator.Next();
@@ -147,6 +161,11 @@ namespace MasonOgCRM.DataAccess.InMemory
 		{
 			UserAccounts[userAccount.Id] = userAccount;
 			return Task.FromResult(0);
+		}
+
+		public int GetUserAccountTotalCount()
+		{
+			return UserAccounts.Count;
 		}
 	}
 }

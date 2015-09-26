@@ -40,6 +40,12 @@ namespace MasonOgCRM.DataAccess.Common
 		Task<List<Customer>> GetAllCustomersAsync();
 
 		/// <summary>
+		/// Get all customer Id's from the database asynchronously.
+		/// </summary>
+		/// <returns></returns>
+		Task<List<int>> GetAllCustomerIdsAsync();
+
+		/// <summary>
 		/// Retrieve all Customer objects from the repostory that match the given expression.
 		/// </summary>
 		/// <param name="expression">Expression that returns true for Customer objects to retrieve.</param>
@@ -107,6 +113,18 @@ namespace MasonOgCRM.DataAccess.Common
 		/// <param name="userAccount">UserAccount to add to the repository.</param>
 		/// <returns></returns>
 		Task AddUserAccountAsync(UserAccount userAccount);
+
+		/// <summary>
+		/// Get all User Account Id's from the database asynchronously.
+		/// </summary>
+		/// <returns></returns>
+		Task<List<int>> GetAllUserAccountIdsAsync();
+
+		/// <summary>
+		/// Returns the total number of user accounts in the database.
+		/// </summary>
+		/// <returns></returns>
+		int GetUserAccountTotalCount();
 
 		/// <summary>
 		/// Retrieve a Note from the repository by Id.

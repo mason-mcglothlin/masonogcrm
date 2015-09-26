@@ -27,7 +27,7 @@ namespace MasonOgCRM.WebApp.Filters
 				var layoutViewModel = new LayoutViewModel()
 				{
 					NumberOfCustomers = Repository.GetCustomerTotalCount(),
-					NumberOfUserAccounts = 21
+					NumberOfUserAccounts = Repository.GetUserAccountTotalCount()
 				};
 				(result as ViewResult).ViewBag.LayoutViewModel = layoutViewModel;
 			}

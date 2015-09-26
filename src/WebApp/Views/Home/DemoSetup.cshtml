@@ -1,0 +1,36 @@
+﻿
+@{
+    ViewBag.Title = "Demo Setup";
+}
+
+<h2>Demo Setup</h2>
+
+<p>
+    Click the button below to seed the database with some sample data.
+</p>
+@using (Html.BeginForm(nameof(HomeController.PerformSeed),
+             nameof(HomeController).RemoveControllerFromName()))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Seed Database" class="btn btn-primary" />
+        </div>
+    </div>
+}
+
+<p>
+    Click the button below to remove all data from the database.
+</p>
+@using (Html.BeginForm(nameof(HomeController.PerformEmpty),
+                         nameof(HomeController).RemoveControllerFromName()))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Empty Database" class="btn btn-danger" />
+        </div>
+    </div>
+}

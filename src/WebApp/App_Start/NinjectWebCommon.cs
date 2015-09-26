@@ -47,9 +47,7 @@ namespace MasonOgCRM.WebApp.App_Start
 			try
 			{
 				kernel.Bind<Func<IKernel>>().ToMethod(ctx => () => new Bootstrapper().Kernel);
-				kernel.Bind<IHttpModule>().To<HttpApplicationInitializationHttpModule>();
-				kernel.BindFilter<LayoutViewModelInjectorAttribute>(FilterScope.Global, 0);
-				kernel.BindFilter<HandleErrorAttribute>(FilterScope.Global, 0);
+				kernel.Bind<IHttpModule>().To<HttpApplicationInitializationHttpModule>();				
 				RegisterServices(kernel);
 				return kernel;
 			}
@@ -66,6 +64,9 @@ namespace MasonOgCRM.WebApp.App_Start
 		/// <param name="kernel">The kernel.</param>
 		private static void RegisterServices(IKernel kernel)
 		{
+			kernel.BindFilter<LayoutViewModelInjectorAttribute>(FilterScope.Global, 0);
+			kernel.BindFilter<HandleErrorAttribute>(FilterScope.Global, 0);
+
 			kernel.Bind<IOgCRMRepository>().To<InMemoryRepository>().InSingletonScope();
 			//kernel.Bind<IOgCRMRepository>().ToMethod((IContext) => new EntityFrameworkRepository(connectionString));
 		}

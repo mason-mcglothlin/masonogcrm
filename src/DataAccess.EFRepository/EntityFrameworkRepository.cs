@@ -57,6 +57,15 @@ namespace MasonOgCRM.DataAccess.EF
 		}
 
 		/// <summary>
+		/// Get all customer Id's from the database asynchronously.
+		/// </summary>
+		/// <returns></returns>
+		public async Task<List<int>> GetAllCustomerIdsAsync()
+		{
+			return await DBContext.Customers.Select(c => c.Id).ToListAsync();
+		}
+
+		/// <summary>
 		/// Add a note to the repository.
 		/// </summary>
 		/// <param name="userAccount">Note to add the repository.</param>
@@ -242,6 +251,24 @@ namespace MasonOgCRM.DataAccess.EF
 		{
 			DBContext.UserAccounts.AddOrUpdate(userAccount);
 			await DBContext.SaveChangesAsync();
+		}
+
+		/// <summary>
+		/// Returns the total number of user accounts in the database.
+		/// </summary>
+		/// <returns></returns>
+		public int GetUserAccountTotalCount()
+		{
+			return DBContext.UserAccounts.Count();
+		}
+
+		/// <summary>
+		/// Get all User Account Id's from the database asynchronously.
+		/// </summary>
+		/// <returns></returns>
+		public async Task<List<int>> GetAllUserAccountIdsAsync()
+		{
+			return await DBContext.UserAccounts.Select(c => c.Id).ToListAsync();
 		}
 	}
 }

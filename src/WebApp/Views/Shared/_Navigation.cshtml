@@ -22,6 +22,9 @@
             <li class="@Html.IsSelected(action: nameof(HomeController.Index), controller:nameof(HomeController).RemoveControllerFromName())">
                 <a href="@Url.Action(nameof(HomeController.Index), nameof(HomeController).RemoveControllerFromName())"><i class="fa fa-home"></i> <span class="nav-label">Home</span> </a>
             </li>
+            <li class="@Html.IsSelected(action: nameof(HomeController.DemoSetup), controller:nameof(HomeController).RemoveControllerFromName())">
+                <a href="@Url.Action(nameof(HomeController.DemoSetup), nameof(HomeController).RemoveControllerFromName())"><i class="fa fa-database"></i> <span class="nav-label">Demo Setup</span> </a>
+            </li>
             <li class="@Html.IsSelected(controller: nameof(CustomersController).RemoveControllerFromName())">
                 <a href="#"><i class="fa fa-male"></i> <span class="nav-label">Customers </span><span class="label label-warning pull-right">@Model.NumberOfCustomers</span></a>
                 <ul class="nav nav-second-level collapse">
