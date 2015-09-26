@@ -11,13 +11,21 @@ namespace MasonOgCRM.DataAccess.EF
 	/// <summary>
 	/// Entity framework DbContext for accessing the database.
 	/// </summary>
-	class EFDBContext : DbContext
+	public class EFDBContext : DbContext, IDbContext
 	{
+		/// <summary>
+		/// Empty constructor for testing. Do not use.
+		/// </summary>
+		public EFDBContext()
+		{
+
+		}
+
 		/// <summary>
 		/// Constructor for creating a new EFDBContext with the specified connection string.
 		/// </summary>
 		/// <param name="connectionString">Entity Framework connection string to use for accessing the database.</param>
-		public EFDBContext(string connectionString): base(connectionString) { }
+		public EFDBContext(string connectionString) : base(connectionString) { }
 
 		/// <summary>
 		/// Configure EF model primary and foreign keys by overriding DbContext.OnModelCreating

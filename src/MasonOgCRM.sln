@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApp", "WebApp\WebApp.csp
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataAccess.InMemory", "DataAccess.InMemory\DataAccess.InMemory.csproj", "{8B72F4B6-B547-4601-AAB9-88274E02F52D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataAccess.EF.Tests", "DataAccess.EF.Tests\DataAccess.EF.Tests.csproj", "{BFA2C56D-631D-435D-810C-B7C99A9F24AF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{8B72F4B6-B547-4601-AAB9-88274E02F52D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8B72F4B6-B547-4601-AAB9-88274E02F52D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8B72F4B6-B547-4601-AAB9-88274E02F52D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BFA2C56D-631D-435D-810C-B7C99A9F24AF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BFA2C56D-631D-435D-810C-B7C99A9F24AF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BFA2C56D-631D-435D-810C-B7C99A9F24AF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BFA2C56D-631D-435D-810C-B7C99A9F24AF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

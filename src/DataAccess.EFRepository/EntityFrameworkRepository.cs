@@ -19,16 +19,16 @@ namespace MasonOgCRM.DataAccess.EF
 		/// <summary>
 		/// Reference to EntityFrameworkRepository initialized in the constructor, used to interact with the database.
 		/// </summary>
-		private readonly EFDBContext DBContext;
+		private readonly IDbContext DBContext;
 
 		/// <summary>
 		/// Create a new EntityFrameworkRepository with a connection string.
 		/// </summary>
 		/// <param name="connectionString">Connection string to use to initialize the Entity Framework context.</param>
-		public EntityFrameworkRepository(string connectionString)
+		public EntityFrameworkRepository(IDbContext context)
 		{
-			DBContext = new EFDBContext(connectionString);
-		}
+			DBContext = context;
+        }
 
 		/// <summary>
 		/// Add a customer to the repository.
