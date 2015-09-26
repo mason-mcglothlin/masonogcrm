@@ -49,7 +49,7 @@ namespace DataAccess.EF.Tests
 
 			mockSet.Setup(c => c.Add(It.IsAny<Customer>())).Returns(new Customer()).Verifiable();
 			
-			dbContext.Setup(c => c.SaveChangesAsync()).Verifiable();
+			dbContext.Setup(c => c.SaveChangesAsync()).Returns(() => Task.Run(() => { return 1; })).Verifiable();
 		}
 
 		[Test]
@@ -83,7 +83,7 @@ namespace DataAccess.EF.Tests
 			await repository.AddCustomerAsync(customer);
 
 			//Assert
-			dbContext.Verify(c => c.Customers.Add(It.IsAny<Customer>()));
+			mockSet.Verify(c => c.Add(It.IsAny<Customer>()));
 			dbContext.Verify(c => c.SaveChangesAsync());
         }
 	}
