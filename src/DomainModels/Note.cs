@@ -28,6 +28,12 @@ namespace MasonOgCRM.DomainModels
 		/// This is the user that created the note.
 		/// </summary>
 		[DisplayName("Created By")]
-		public string CreatedByUser { get; set; }
+		public string CreatedByUserId { get; set; }
+
+		/// <summary>
+		/// This is the customer that the note is for.
+		/// </summary>
+		[DisplayName("Customer Id")]
+		public string CustomerId { get; set; }
 	}
 }

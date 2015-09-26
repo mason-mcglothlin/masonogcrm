@@ -4,10 +4,10 @@
     ViewBag.Title = "Customer";
 }
 
-<h2>Customer Details</h2>
+<h2>@Model.FirstName @Model.LastName</h2>
 
 <div>
-    <h4>@Model.FirstName @Model.LastName</h4>
+    <h4>Customer Details</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
@@ -34,24 +34,43 @@
             @Html.DisplayFor(model => model.PhoneNumber)
         </dd>
 
+        <dt>
+            @Html.DisplayNameFor(model => model.Address)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Address)
+        </dd>
+
     </dl>
 </div>
-<div id="LocationDiv">
-    Address: @Model.Address
-    <div><iframe id="BingMapsIFrame" width="500" height="400" frameborder="0" src="http://www.bing.com/maps/embed/viewer.aspx?v=3&amp;cp=17.700000~20.000000&amp;lvl=2&amp;w=500&amp;h=400&amp;sty=r&amp;typ=d&amp;pp=&amp;ps=&amp;dir=0&amp;mkt=en-us&amp;form=BMEMJS"></iframe><div style="margin: 12px 0 0 0;"><a target="_blank" href="http://www.bing.com/maps/?cp=17.700000~20.000000&amp;sty=r&amp;lvl=2&amp;sp=&amp;mm_embed=map">View Larger Map</a>&nbsp; |&nbsp; <a target="_blank" href="http://www.bing.com/maps/?cp=17.700000~20.000000&amp;sty=r&amp;lvl=2&amp;rtp=~pos.17.700000_20.000000____&amp;mm_embed=dir">Get Directions</a>&nbsp; |&nbsp; <a target="_blank" href="http://www.bing.com/maps/?cp=kygzzzjnzzzz&amp;sty=b&amp;lvl=18&amp;sp=&amp;mm_embed=be">View Bird's Eye</a></div></div>
 
+<div ng-app="myApp">
+    <h4>Notes</h4>
+    <p>List of notes here.</p>
+    <div ng-controller="NotesController">
+        <i class="fa fa-spinner fa-spin fa-2x" ng-if="loading"></i>
+        <div ng-if="loading == false">
+            <div ng-repeat="note in notes">
+                {{ note }}
+            </div>
+        </div>
+    </div>
+    <h4>Add Note</h4>
+    <p>form here for adding a note</p>
 </div>
+
 <p>
     @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
     <a href="@Url.Action(nameof(CustomersController.Index), nameof(CustomersController).RemoveControllerFromName())">Back to List</a>
 </p>
 @section Scripts{
+    <script src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.6/angular.min.js"></script>
     <script>
-        $(function () {
-            var address = "@Model.Address";
-            var query = encodeURIComponent(address);
-            console.log("Query: " + query);
-            $("#BingMapsIFrame").attr("src", "http://www.bing.com/mapspreview?ss="+query)
+        var app = angular.module('myApp', []);
+        app.controller('NotesController', function ($scope) {
+            $scope.notes = ['hello', 'world', 'test'];
+            $scope.loading = true;
         });
     </script>
 }
