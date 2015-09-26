@@ -6,6 +6,7 @@ using System.Web;
 using System.Web.Mvc;
 using MasonOgCRM.DataAccess.Common;
 using MasonOgCRM.DomainModels;
+using MasonOgCRM.WebApp.Filters;
 
 namespace MasonOgCRM.WebApp.Controllers
 {
@@ -34,6 +35,7 @@ namespace MasonOgCRM.WebApp.Controllers
 			return RedirectToAction(nameof(CustomersController.Index));
 		}
 
+		[CustomerIdExists]
 		public async Task<ActionResult> Details(int id)
 		{
 			return View(await Repository.FindCustomerByIdAsync(id));

@@ -156,6 +156,8 @@
     <Content Include="Views\UserAccount\Index.cshtml" />
     <Content Include="Views\UserAccount\New.cshtml" />
     <Content Include="Views\Customers\Details.cshtml" />
+    <Content Include="Views\Customers\NotFound.cshtml" />
+    <Content Include="Views\Shared\Error.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -176,6 +178,8 @@
     <Compile Include="Controllers\CustomersController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\UserAccountController.cs" />
+    <Compile Include="Filters\CustomerIdExistsAttribute.cs" />
+    <Compile Include="Filters\CustomViewResult.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
