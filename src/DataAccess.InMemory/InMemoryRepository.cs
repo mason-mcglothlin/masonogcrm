@@ -19,6 +19,10 @@ namespace MasonOgCRM.DataAccess.InMemory
 
 		private Random randomNumberGenerator { get; } = new Random(Int32.MaxValue);
 
+		public int GetCustomerTotalCount()
+		{
+			return Customers.Count;
+		}
 
 		public Task AddCustomerAsync(Customer customer)
 		{

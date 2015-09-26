@@ -7,6 +7,7 @@ using System.Web.Mvc;
 using MasonOgCRM.DataAccess.Common;
 using MasonOgCRM.DomainModels;
 using MasonOgCRM.WebApp.Filters;
+using MasonOgCRM.WebApp.ViewModels;
 
 namespace MasonOgCRM.WebApp.Controllers
 {
@@ -21,7 +22,11 @@ namespace MasonOgCRM.WebApp.Controllers
 
 		public async Task<ActionResult> Index()
 		{
-			return View(await Repository.GetAllCustomersAsync());
+			var vm = new CustomersIndexViewModel()
+			{
+				AllCustomersList = await Repository.GetAllCustomersAsync()
+			};
+            return View(vm);
 		}
 
 		public ActionResult New()

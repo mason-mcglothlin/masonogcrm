@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Web.Mvc;
 using MasonOgCRM.DataAccess.Common;
+using MasonOgCRM.WebApp.Helpers;
 using Ninject;
 
 namespace MasonOgCRM.WebApp.Filters

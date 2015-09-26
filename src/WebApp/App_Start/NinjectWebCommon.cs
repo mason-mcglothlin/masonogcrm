@@ -5,12 +5,15 @@ namespace MasonOgCRM.WebApp.App_Start
 {
 	using System;
 	using System.Web;
+	using System.Web.Mvc;
 	using DataAccess.Common;
 	using DataAccess.EF;
 	using DataAccess.InMemory;
+	using Filters;
 	using Microsoft.Web.Infrastructure.DynamicModuleHelper;
 	using Ninject;
 	using Ninject.Web.Common;
+	using Ninject.Web.Mvc.FilterBindingSyntax;
 
 	public static class NinjectWebCommon
 	{
@@ -45,6 +48,8 @@ namespace MasonOgCRM.WebApp.App_Start
 			{
 				kernel.Bind<Func<IKernel>>().ToMethod(ctx => () => new Bootstrapper().Kernel);
 				kernel.Bind<IHttpModule>().To<HttpApplicationInitializationHttpModule>();
+				kernel.BindFilter<LayoutViewModelInjectorAttribute>(FilterScope.Global, 0);
+				kernel.BindFilter<HandleErrorAttribute>(FilterScope.Global, 0);
 				RegisterServices(kernel);
 				return kernel;
 			}

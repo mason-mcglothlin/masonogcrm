@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Web.Mvc;
 
-namespace MasonOgCRM.WebApp.Filters
+namespace MasonOgCRM.WebApp.Helpers
 {
 	public class CustomViewResult : ViewResult
 	{

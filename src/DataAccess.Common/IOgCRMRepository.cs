@@ -28,6 +28,12 @@ namespace MasonOgCRM.DataAccess.Common
 		Customer FindCustomerById(int id);
 
 		/// <summary>
+		/// Retrieves the total number of customers from the database.
+		/// </summary>
+		/// <returns></returns>
+		int GetCustomerTotalCount();
+
+		/// <summary>
 		/// Retrieve all Customer objects from the repository.
 		/// </summary>
 		/// <returns></returns>

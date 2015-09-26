@@ -19,7 +19,6 @@ namespace MasonOgCRM.WebApp
 		{
 			GlobalConfiguration.Configure(WebApiConfig.Register);
 			RouteConfig.RegisterRoutes(RouteTable.Routes);
-			FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
 			BundleConfig.RegisterBundles(BundleTable.Bundles);
 		}
 

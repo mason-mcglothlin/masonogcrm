@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Customer>
+﻿@model CustomersIndexViewModel
 
 @{
     ViewBag.Title = "Customers";
@@ -10,7 +10,7 @@
     <a href="@Url.Action(nameof(CustomersController.New), nameof(CustomersController).RemoveControllerFromName())">Create New</a>
 </p>
 
-@if (Model.Count() == 0)
+@if (Model.AllCustomersList.Count() == 0)
 {
     <p>There are no customers in the database. Click the button above to add one!</p>
 }
@@ -20,51 +20,51 @@ else
         <table class="table table-striped">
             <tr>
                 <th>
-                    @Html.DisplayNameFor(model => model.FirstName)
+                    @Html.DisplayNameFor(model => model.AllCustomersList[0].FirstName)
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.LastName)
+                    @Html.DisplayNameFor(model => model.AllCustomersList[0].LastName)
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.CompanyName)
+                    @Html.DisplayNameFor(model => model.AllCustomersList[0].CompanyName)
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.EmailAddress)
+                    @Html.DisplayNameFor(model => model.AllCustomersList[0].EmailAddress)
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.Address)
+                    @Html.DisplayNameFor(model => model.AllCustomersList[0].Address)
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.PhoneNumber)
+                    @Html.DisplayNameFor(model => model.AllCustomersList[0].PhoneNumber)
                 </th>
                 <th></th>
             </tr>
 
-            @foreach (var item in Model)
+            @foreach (var customer in Model.AllCustomersList)
             {
             <tr>
                 <td>
-                    @Html.DisplayFor(modelItem => item.FirstName)
+                    @Html.DisplayFor(modelItem => customer.FirstName)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.LastName)
+                    @Html.DisplayFor(modelItem => customer.LastName)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.CompanyName)
+                    @Html.DisplayFor(modelItem => customer.CompanyName)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.EmailAddress)
+                    @Html.DisplayFor(modelItem => customer.EmailAddress)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Address)
+                    @Html.DisplayFor(modelItem => customer.Address)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.PhoneNumber)
+                    @Html.DisplayFor(modelItem => customer.PhoneNumber)
                 </td>
                 <td>
-                    @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
-                    <a href="@Url.Action(nameof(CustomersController.Details), nameof(CustomersController).RemoveControllerFromName(), new { id = item.Id })">Details</a> |
-                    @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                    @Html.ActionLink("Edit", "Edit", new { id = customer.Id }) |
+                    <a href="@Url.Action(nameof(CustomersController.Details), nameof(CustomersController).RemoveControllerFromName(), new { id = customer.Id })">Details</a> |
+                    @Html.ActionLink("Delete", "Delete", new { id = customer.Id })
                 </td>
             </tr>}
         </table>

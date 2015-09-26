@@ -48,6 +48,15 @@ namespace MasonOgCRM.DataAccess.EF
 		}
 
 		/// <summary>
+		/// Retrieves the total number of customers from the database.
+		/// </summary>
+		/// <returns></returns>
+		public int GetCustomerTotalCount()
+		{
+			return DBContext.Customers.Count();
+		}
+
+		/// <summary>
 		/// Add a note to the repository.
 		/// </summary>
 		/// <param name="userAccount">Note to add the repository.</param>
