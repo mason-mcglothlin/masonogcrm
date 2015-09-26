@@ -287,7 +287,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\ElmahErrors\" />
-    <Folder Include="Views\LayouView\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DataAccess.Common\DataAccess.Common.csproj">
