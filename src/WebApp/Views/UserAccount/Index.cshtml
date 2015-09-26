@@ -7,7 +7,7 @@
 <h2>Users</h2>
 
 <p>
-    <a href="@Url.Action(nameof(UserAccountController.New), nameof(UserAccountController).RemoveControllerFromName())">Create New</a>
+    <a href="@Url.Action(nameof(UserAccountController.New), nameof(UserAccountController).RemoveControllerFromName())" class="btn btn-primary">Create New</a>
 </p>
 @if (Model.Count() == 0)
 {
