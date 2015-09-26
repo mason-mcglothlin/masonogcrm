@@ -17,9 +17,10 @@ namespace MasonOgCRM.WebApp.Filters
 
 		public override void OnActionExecuting(ActionExecutingContext filterContext)
 		{
-			var idStr = filterContext.RouteData.Values["id"].ToString();
-			if (idStr != null)
+			var idObj = filterContext.RouteData.Values["id"];
+			if (idObj != null)
 			{
+				var idStr = idObj.ToString();
 				var id = -1;
 				if (Int32.TryParse(idStr, out id))
 				{

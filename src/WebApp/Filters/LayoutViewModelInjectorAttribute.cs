@@ -19,7 +19,7 @@ namespace MasonOgCRM.WebApp.Filters
 			Repository = repository;
 		}
 
-		public override void OnActionExecuted(ActionExecutedContext filterContext)
+		public override void OnResultExecuting(ResultExecutingContext filterContext)
 		{
 			var result = filterContext.Result;
 			if (result is ViewResult)
@@ -31,6 +31,6 @@ namespace MasonOgCRM.WebApp.Filters
 				};
 				(result as ViewResult).ViewBag.LayoutViewModel = layoutViewModel;
 			}
-		}
+		}	
 	}
 }
