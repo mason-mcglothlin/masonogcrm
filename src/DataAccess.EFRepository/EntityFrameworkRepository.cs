@@ -77,7 +77,7 @@ namespace MasonOgCRM.DataAccess.EF
 		public async Task DeleteCustomerAsync(int id)
 		{
 			var customer = await FindCustomerByIdAsync(id);
-			DBContext.Entry(customer).State = EntityState.Deleted;
+			DBContext.SetState(customer, EntityState.Deleted);
 			await DBContext.SaveChangesAsync();
 		}
 

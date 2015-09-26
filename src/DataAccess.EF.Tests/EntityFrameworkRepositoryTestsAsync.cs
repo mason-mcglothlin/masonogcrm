@@ -48,8 +48,10 @@ namespace DataAccess.EF.Tests
 			dbContext.Setup(c => c.Customers).Returns(mockSet.Object);
 
 			mockSet.Setup(c => c.Add(It.IsAny<Customer>())).Returns(new Customer()).Verifiable();
-			
+
 			dbContext.Setup(c => c.SaveChangesAsync()).Returns(() => Task.Run(() => { return 1; })).Verifiable();
+
+			dbContext.Setup(c => c.SetState(It.IsAny<object>(), It.IsAny<EntityState>())).Verifiable();
 		}
 
 		[Test]
@@ -85,6 +87,48 @@ namespace DataAccess.EF.Tests
 			//Assert
 			mockSet.Verify(c => c.Add(It.IsAny<Customer>()));
 			dbContext.Verify(c => c.SaveChangesAsync());
-        }
+		}
+
+		[Test]
+		public async Task DeleteCustomerAsync()
+		{
+			//Arrange
+			var repository = new EntityFrameworkRepository(dbContext.Object);
+
+			//Act
+			await repository.DeleteCustomerAsync(mason.Id);
+
+			//Assert
+			dbContext.Verify(c => c.SetState(mason, EntityState.Deleted));
+			dbContext.Verify(c => c.SaveChangesAsync());
+		}
+
+		[Test]
+		public async Task GetAllCustomersAsync()
+		{
+			//Arrange
+			var repository = new EntityFrameworkRepository(dbContext.Object);
+
+			//Act
+			var customers = await repository.GetAllCustomersAsync();
+
+			//Assert
+			Assert.IsNotNull(customers);
+			Assert.AreEqual(mockSet.Object.Count(), customers.Count);
+		}
+
+		[Test]
+		public async Task GetAllCustomersByExpressionAsync()
+		{
+			//Arrange
+			var repository = new EntityFrameworkRepository(dbContext.Object);
+
+			//Act
+			var customers = await repository.GetAllCustomersAsync(c => c.CompanyName.Contains("Inc"));
+
+			//Assert
+			Assert.IsNotNull(customers);
+			Assert.AreEqual(2, customers.Count);
+		}
 	}
 }

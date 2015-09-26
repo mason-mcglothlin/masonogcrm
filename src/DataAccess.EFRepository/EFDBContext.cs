@@ -55,5 +55,10 @@ namespace MasonOgCRM.DataAccess.EF
 		/// Object to call methods against for interacting with UserAccount objects in the database.
 		/// </summary>
 		public DbSet<UserAccount> UserAccounts { get; set; }
+
+		public void SetState(object entity, EntityState state)
+		{
+			Entry(entity).State = state;
+		}
 	}
 }

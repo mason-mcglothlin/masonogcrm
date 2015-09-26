@@ -17,5 +17,6 @@ namespace MasonOgCRM.DataAccess.EF
 		Task<int> SaveChangesAsync();
 		int SaveChanges();
 		DbEntityEntry<TEntity> Entry<TEntity>(TEntity entity) where TEntity : class;
+		void SetState(object entity, EntityState state);
     }
 }
