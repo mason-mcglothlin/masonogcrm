@@ -24,8 +24,10 @@ namespace MasonOgCRM.DataAccess.EF
 		/// <summary>
 		/// Constructor for creating a new EFDBContext with the specified connection string.
 		/// </summary>
-		/// <param name="connectionString">Entity Framework connection string to use for accessing the database.</param>
+		/// <param name="connectionString">Entity Framework connection string to use for accessing the database.
+		/// Can be a connection string name or full connection string.</param>
 		public EFDBContext(string connectionString) : base(connectionString) { }
+
 
 		/// <summary>
 		/// Configure EF model primary and foreign keys by overriding DbContext.OnModelCreating

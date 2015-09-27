@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Routing;
+using MasonOgCRM.WebApp.Filters;
 
 namespace MasonOgCRM.WebApp.App_Start
 {
@@ -13,6 +14,8 @@ namespace MasonOgCRM.WebApp.App_Start
 		public static void Register(HttpConfiguration config)
 		{
 			config.MapHttpAttributeRoutes();
+
+			config.Filters.Add(new ElmahWebApiErrorHandlerAttribute());
 
 			config.Routes.MapHttpRoute(
 				name: "DefaultApi",

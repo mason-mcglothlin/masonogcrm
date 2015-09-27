@@ -67,8 +67,9 @@ namespace MasonOgCRM.WebApp.App_Start
 			kernel.BindFilter<LayoutViewModelInjectorAttribute>(FilterScope.Global, 0);
 			kernel.BindFilter<HandleErrorAttribute>(FilterScope.Global, 0);
 
-			kernel.Bind<IOgCRMRepository>().To<InMemoryRepository>().InSingletonScope();
-			//kernel.Bind<IOgCRMRepository>().ToMethod((IContext) => new EntityFrameworkRepository(connectionString));
+			//kernel.Bind<IOgCRMRepository>().To<InMemoryRepository>().InSingletonScope();
+			var dbContext = new EFDBContext("SqlServerLocalDb");
+            kernel.Bind<IOgCRMRepository>().ToMethod((IContext) => new EntityFrameworkRepository(dbContext));
 		}
 	}
 }

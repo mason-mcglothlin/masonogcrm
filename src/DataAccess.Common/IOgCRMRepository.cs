@@ -14,13 +14,6 @@ namespace MasonOgCRM.DataAccess.Common
 	public interface IOgCRMRepository
 	{
 		/// <summary>
-		/// Retrieve a Customer from the repository by Id asynchronously.
-		/// </summary>
-		/// <param name="id">Id of the customer to retrieve.</param>
-		/// <returns></returns>
-		Task<Customer> FindCustomerByIdAsync(int id);
-
-		/// <summary>
 		/// Retrieve a Customer from the repository by Id.
 		/// </summary>
 		/// <param name="id">Id of the customer to retrieve.</param>
@@ -37,88 +30,88 @@ namespace MasonOgCRM.DataAccess.Common
 		/// Retrieve all Customer objects from the repository.
 		/// </summary>
 		/// <returns></returns>
-		Task<List<Customer>> GetAllCustomersAsync();
+		List<Customer> GetAllCustomers();
 
 		/// <summary>
-		/// Get all customer Id's from the database asynchronously.
+		/// Get all customer Id's from the database.
 		/// </summary>
 		/// <returns></returns>
-		Task<List<int>> GetAllCustomerIdsAsync();
+		List<int> GetAllCustomerIds();
 
 		/// <summary>
 		/// Retrieve all Customer objects from the repostory that match the given expression.
 		/// </summary>
 		/// <param name="expression">Expression that returns true for Customer objects to retrieve.</param>
 		/// <returns></returns>
-		Task<List<Customer>> GetAllCustomersAsync(Expression<Func<Customer, bool>> expression);
+		List<Customer> GetAllCustomers(Expression<Func<Customer, bool>> expression);
 
 		/// <summary>
 		/// Remove a customer from the repository.
 		/// </summary>
 		/// <param name="id">Id of the customer to remove from the repository.</param>
 		/// <returns></returns>
-		Task DeleteCustomerAsync(int id);
+		void DeleteCustomer(int id);
 
 		/// <summary>
 		/// Update a Customer in the repository that has the matching Id with modified property values.
 		/// </summary>
 		/// <param name="customer">Customer object that contains the modified property values to update with.</param>
 		/// <returns></returns>
-		Task UpdateCustomerAsync(Customer customer);
+		void UpdateCustomer(Customer customer);
 
 		/// <summary>
 		/// Add a customer to the repository.
 		/// </summary>
 		/// <param name="customer">Customer object to add to the repository.</param>
 		/// <returns></returns>
-		Task AddCustomerAsync(Customer customer);
+		void AddCustomer(Customer customer);
 
 		/// <summary>
 		/// Retrieve a UserAccount from the repository by Id.
 		/// </summary>
 		/// <param name="id">Id of the UserAccount to retrieve.</param>
 		/// <returns></returns>
-		Task<UserAccount> FindUserAccountByIdAsync(int id);
+		UserAccount FindUserAccountById(int id);
 
 		/// <summary>
 		/// Retrieve all UserAccount objects from the repository.
 		/// </summary>
 		/// <returns></returns>
-		Task<List<UserAccount>> GetAllUserAccountsAsync();
+		List<UserAccount> GetAllUserAccounts();
 
 		/// <summary>
 		/// Retrieve all UserAccount objects from the repository that match the given expression.
 		/// </summary>
 		/// <param name="expression"></param>
 		/// <returns></returns>
-		Task<List<UserAccount>> GetAllUserAccountsAsync(Expression<Func<UserAccount, bool>> expression);
+		List<UserAccount> GetAllUserAccounts(Expression<Func<UserAccount, bool>> expression);
 
 		/// <summary>
 		/// Remove a user account from the repository.
 		/// </summary>
 		/// <param name="id">Id of the user account to remove from the repository.</param>
 		/// <returns></returns>
-		Task DeleteUserAccountAsync(int id);
+		void DeleteUserAccount(int id);
 
 		/// <summary>
 		/// Update a UserAccount in the repository that has the matching Id with modified property values.
 		/// </summary>
 		/// <param name="userAccount">UserAccoubt object that contains the modified property values to update with.</param>
 		/// <returns></returns>
-		Task UpdateUserAccountAsync(UserAccount userAccount);
+		void UpdateUserAccount(UserAccount userAccount);
 
 		/// <summary>
 		/// Add a user account to the repository.
 		/// </summary>
 		/// <param name="userAccount">UserAccount to add to the repository.</param>
 		/// <returns></returns>
-		Task AddUserAccountAsync(UserAccount userAccount);
+		void AddUserAccount(UserAccount userAccount);
 
 		/// <summary>
-		/// Get all User Account Id's from the database asynchronously.
+		/// Get all User Account Id's from the database.
 		/// </summary>
 		/// <returns></returns>
-		Task<List<int>> GetAllUserAccountIdsAsync();
+		List<int> GetAllUserAccountIds();
 
 		/// <summary>
 		/// Returns the total number of user accounts in the database.
@@ -131,40 +124,40 @@ namespace MasonOgCRM.DataAccess.Common
 		/// </summary>
 		/// <param name="id">Id of the note to retrieve.</param>
 		/// <returns></returns>
-		Task<Note> FindNoteByIdAsync(int id);
+		Note FindNoteById(int id);
 
 		/// <summary>
 		/// Retrieve all Note objects from the repository.
 		/// </summary>
 		/// <returns></returns>
-		Task<List<Note>> GetAllNotesAsync();
+		List<Note> GetAllNotes();
 
 		/// <summary>
 		/// Retrieve all Note objects from the repository that match the given expression.
 		/// </summary>
 		/// <param name="expression">Expression that returns true for Customer objects to retrieve.</param>
 		/// <returns></returns>
-		Task<List<Note>> GetAllNotesAsync(Expression<Func<Note, bool>> expression);
+		List<Note> GetAllNotes(Expression<Func<Note, bool>> expression);
 
 		/// <summary>
 		/// Remove a note from the repository.
 		/// </summary>
 		/// <param name="id">Id of the note to remove from the repository.</param>
 		/// <returns></returns>
-		Task DeleteNoteAsync(int id);
+		void DeleteNote(int id);
 
 		/// <summary>
 		/// Update a Note in the repository that has the matching Id with modified property values.
 		/// </summary>
 		/// <param name="note">Note object that contains the modified property values to update with.</param>
 		/// <returns></returns>
-		Task UpdateNoteAsync(Note note);
+		void UpdateNote(Note note);
 
 		/// <summary>
 		/// Add a note to the repository.
 		/// </summary>
 		/// <param name="userAccount">Note to add the repository.</param>
 		/// <returns></returns>
-		Task AddNoteAsync(Note note);
+		void AddNote(Note note);
 	}
 }

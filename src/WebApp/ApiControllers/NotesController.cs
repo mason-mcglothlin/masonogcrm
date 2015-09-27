@@ -26,21 +26,21 @@ namespace MasonOgCRM.WebApp.ApiControllers
 		/// <param name="id">The Id of the CUSTOMER to retrieve notes for.</param>
 		/// <returns></returns>
 		[HttpGet]
-		public async Task<IEnumerable<Note>> Get(int id)
+		public IEnumerable<Note> Get(int id)
 		{
-			return await Repository.GetAllNotesAsync(c => c.CustomerId == id);
+			return Repository.GetAllNotes(c => c.CustomerId == id);
 		}
 
 		[HttpPost]
-		public async Task Post([FromBody]Note note)
+		public void Post([FromBody]Note note)
 		{
-			await Repository.AddNoteAsync(note);
+			Repository.AddNote(note);
 		}
 
 		[HttpDelete]
-		public async Task Delete(int id)
+		public void Delete(int id)
 		{
-			await Repository.DeleteNoteAsync(id);
+			Repository.DeleteNote(id);
 		}
 	}
 }

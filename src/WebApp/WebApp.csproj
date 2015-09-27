@@ -306,6 +306,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\UserAccountController.cs" />
     <Compile Include="Filters\CustomerIdExistsAttribute.cs" />
+    <Compile Include="Filters\ElmahWebApiErrorHandlerAttribute.cs" />
     <Compile Include="Filters\LayoutViewModelInjectorAttribute.cs" />
     <Compile Include="Helpers\CustomViewResult.cs" />
     <Compile Include="Global.asax.cs">

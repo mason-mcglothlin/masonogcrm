@@ -20,11 +20,11 @@ namespace MasonOgCRM.WebApp.Controllers
 			Repository = repository;
 		}
 
-		public async Task<ActionResult> Index()
+		public ActionResult Index()
 		{
 			var vm = new CustomersIndexViewModel()
 			{
-				AllCustomersList = await Repository.GetAllCustomersAsync()
+				AllCustomersList = Repository.GetAllCustomers()
 			};
             return View(vm);
 		}
@@ -34,16 +34,16 @@ namespace MasonOgCRM.WebApp.Controllers
 			return View();
 		}
 
-		public async Task<ActionResult> Create(Customer customer)
+		public ActionResult Create(Customer customer)
 		{
-			await Repository.AddCustomerAsync(customer);
+			Repository.AddCustomer(customer);
 			return RedirectToAction(nameof(CustomersController.Index));
 		}
 
 		[CustomerIdExists]
-		public async Task<ActionResult> Details(int id)
+		public ActionResult Details(int id)
 		{
-			return View(await Repository.FindCustomerByIdAsync(id));
+			return View(Repository.FindCustomerById(id));
 		}
 	}
 }

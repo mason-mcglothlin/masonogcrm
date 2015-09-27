@@ -18,9 +18,9 @@ namespace MasonOgCRM.WebApp.Controllers
 			Repository = repository;
 		}
 
-		public async Task<ActionResult> Index()
+		public ActionResult Index()
         {			
-            return View(await Repository.GetAllUserAccountsAsync());
+            return View(Repository.GetAllUserAccounts());
         }
 
 		public ActionResult New()
@@ -28,9 +28,9 @@ namespace MasonOgCRM.WebApp.Controllers
 			return View();
 		}
 
-		public async Task<ActionResult> Create(UserAccount account)
+		public ActionResult Create(UserAccount account)
 		{
-			await Repository.AddUserAccountAsync(account);
+			Repository.AddUserAccount(account);
 			return RedirectToAction(nameof(UserAccountController.Index));
 		}
 

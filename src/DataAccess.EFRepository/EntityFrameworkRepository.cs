@@ -35,12 +35,6 @@ namespace MasonOgCRM.DataAccess.EF
 		/// </summary>
 		/// <param name="customer">Customer object to add to the repository.</param>
 		/// <returns></returns>
-		public async Task AddCustomerAsync(Customer customer)
-		{
-			DBContext.Customers.Add(customer);
-			await DBContext.SaveChangesAsync();
-		}
-
 		public void AddCustomer(Customer customer)
 		{
 			DBContext.Customers.Add(customer);
@@ -57,12 +51,12 @@ namespace MasonOgCRM.DataAccess.EF
 		}
 
 		/// <summary>
-		/// Get all customer Id's from the database asynchronously.
+		/// Get all customer Id's from the database.
 		/// </summary>
 		/// <returns></returns>
-		public async Task<List<int>> GetAllCustomerIdsAsync()
+		public List<int> GetAllCustomerIds()
 		{
-			return await DBContext.Customers.Select(c => c.Id).ToListAsync();
+			return DBContext.Customers.Select(c => c.Id).ToList();
 		}
 
 		/// <summary>
@@ -70,10 +64,10 @@ namespace MasonOgCRM.DataAccess.EF
 		/// </summary>
 		/// <param name="userAccount">Note to add the repository.</param>
 		/// <returns></returns>
-		public async Task AddNoteAsync(Note note)
+		public void AddNote(Note note)
 		{
 			DBContext.Notes.Add(note);
-			await DBContext.SaveChangesAsync();
+			DBContext.SaveChanges();
 		}
 
 		/// <summary>
@@ -81,10 +75,10 @@ namespace MasonOgCRM.DataAccess.EF
 		/// </summary>
 		/// <param name="userAccount">UserAccount to add to the repository.</param>
 		/// <returns></returns>
-		public async Task AddUserAccountAsync(UserAccount userAccount)
+		public void AddUserAccount(UserAccount userAccount)
 		{
 			DBContext.UserAccounts.Add(userAccount);
-			await DBContext.SaveChangesAsync();
+			DBContext.SaveChanges();
 		}
 
 		/// <summary>
@@ -92,11 +86,11 @@ namespace MasonOgCRM.DataAccess.EF
 		/// </summary>
 		/// <param name="id">Id of the customer to remove from the repository.</param>
 		/// <returns></returns>
-		public async Task DeleteCustomerAsync(int id)
+		public void DeleteCustomer(int id)
 		{
-			var customer = await FindCustomerByIdAsync(id);
+			var customer = FindCustomerById(id);
 			DBContext.SetState(customer, EntityState.Deleted);
-			await DBContext.SaveChangesAsync();
+			DBContext.SaveChanges();
 		}
 
 		/// <summary>
@@ -104,11 +98,11 @@ namespace MasonOgCRM.DataAccess.EF
 		/// </summary>
 		/// <param name="id">Id of the note to remove from the repository.</param>
 		/// <returns></returns>
-		public async Task DeleteNoteAsync(int id)
+		public void DeleteNote(int id)
 		{
-			var note = await FindNoteByIdAsync(id);
+			var note = FindNoteById(id);
 			DBContext.Entry(note).State = EntityState.Deleted;
-			await DBContext.SaveChangesAsync();
+			DBContext.SaveChanges();
 		}
 
 		/// <summary>
@@ -116,21 +110,11 @@ namespace MasonOgCRM.DataAccess.EF
 		/// </summary>
 		/// <param name="id">Id of the user account to remove from the repository.</param>
 		/// <returns></returns>
-		public async Task DeleteUserAccountAsync(int id)
+		public void DeleteUserAccount(int id)
 		{
-			var userAccount = await FindUserAccountByIdAsync(id);
+			var userAccount = FindUserAccountById(id);
 			DBContext.Entry(userAccount).State = EntityState.Deleted;
-			await DBContext.SaveChangesAsync();
-		}
-
-		/// <summary>
-		/// Retrieve a Customer from the repository by Id asynchronously.
-		/// </summary>
-		/// <param name="id">Id of the customer to retrieve.</param>
-		/// <returns></returns>
-		public async Task<Customer> FindCustomerByIdAsync(int id)
-		{
-			return await DBContext.Customers.Where(customer => customer.Id == id).SingleAsync();
+			DBContext.SaveChanges();
 		}
 
 		/// <summary>
@@ -148,9 +132,9 @@ namespace MasonOgCRM.DataAccess.EF
 		/// </summary>
 		/// <param name="id">Id of the note to retrieve.</param>
 		/// <returns></returns>
-		public async Task<Note> FindNoteByIdAsync(int id)
+		public Note FindNoteById(int id)
 		{
-			return await DBContext.Notes.Where(note => note.Id == id).SingleAsync();
+			return DBContext.Notes.Where(note => note.Id == id).Single();
 		}
 
 		/// <summary>
@@ -158,9 +142,9 @@ namespace MasonOgCRM.DataAccess.EF
 		/// </summary>
 		/// <param name="id">Id of the UserAccount to retrieve.</param>
 		/// <returns></returns>
-		public async Task<UserAccount> FindUserAccountByIdAsync(int id)
+		public UserAccount FindUserAccountById(int id)
 		{
-			return await DBContext.UserAccounts.Where(userAccount => userAccount.Id == id).SingleAsync();
+			return DBContext.UserAccounts.Where(userAccount => userAccount.Id == id).Single();
 		}
 
 		/// <summary>
@@ -168,18 +152,18 @@ namespace MasonOgCRM.DataAccess.EF
 		/// </summary>
 		/// <param name="expression">Expression that returns true for Customer objects to retrieve.</param>
 		/// <returns></returns>
-		public async Task<List<Customer>> GetAllCustomersAsync(Expression<Func<Customer, bool>> expression)
+		public List<Customer> GetAllCustomers(Expression<Func<Customer, bool>> expression)
 		{
-			return await DBContext.Customers.Where(expression).ToListAsync();
+			return DBContext.Customers.Where(expression).ToList();
 		}
 
 		/// <summary>
 		/// Retrieve all Customer objects from the repository.
 		/// </summary>
 		/// <returns></returns>
-		public async Task<List<Customer>> GetAllCustomersAsync()
+		public List<Customer> GetAllCustomers()
 		{
-			return await DBContext.Customers.ToListAsync();
+			return DBContext.Customers.ToList();
 		}
 
 		/// <summary>
@@ -187,18 +171,18 @@ namespace MasonOgCRM.DataAccess.EF
 		/// </summary>
 		/// <param name="expression">Expression that returns true for Customer objects to retrieve.</param>
 		/// <returns></returns>
-		public async Task<List<Note>> GetAllNotesAsync(Expression<Func<Note, bool>> expression)
+		public List<Note> GetAllNotes(Expression<Func<Note, bool>> expression)
 		{
-			return await DBContext.Notes.Where(expression).ToListAsync();
+			return DBContext.Notes.Where(expression).ToList();
 		}
 
 		/// <summary>
 		/// Retrieve all Note objects from the repository.
 		/// </summary>
 		/// <returns></returns>
-		public async Task<List<Note>> GetAllNotesAsync()
+		public  List<Note> GetAllNotes()
 		{
-			return await DBContext.Notes.ToListAsync();
+			return DBContext.Notes.ToList();
 		}
 
 		/// <summary>
@@ -206,18 +190,18 @@ namespace MasonOgCRM.DataAccess.EF
 		/// </summary>
 		/// <param name="expression"></param>
 		/// <returns></returns>
-		public async Task<List<UserAccount>> GetAllUserAccountsAsync(Expression<Func<UserAccount, bool>> expression)
+		public List<UserAccount> GetAllUserAccounts(Expression<Func<UserAccount, bool>> expression)
 		{
-			return await DBContext.UserAccounts.Where(expression).ToListAsync();
+			return DBContext.UserAccounts.Where(expression).ToList();
 		}
 
 		/// <summary>
 		/// Retrieve all UserAccount objects from the repository.
 		/// </summary>
 		/// <returns></returns>
-		public async Task<List<UserAccount>> GetAllUserAccountsAsync()
+		public List<UserAccount> GetAllUserAccounts()
 		{
-			return await DBContext.UserAccounts.ToListAsync();
+			return DBContext.UserAccounts.ToList();
 		}
 
 		/// <summary>
@@ -225,10 +209,10 @@ namespace MasonOgCRM.DataAccess.EF
 		/// </summary>
 		/// <param name="customer">Customer object that contains the modified property values to update with.</param>
 		/// <returns></returns>
-		public async Task UpdateCustomerAsync(Customer customer)
+		public void UpdateCustomer(Customer customer)
 		{
 			DBContext.Customers.AddOrUpdate(customer);
-			await DBContext.SaveChangesAsync();
+			DBContext.SaveChanges();
 		}
 
 		/// <summary>
@@ -236,10 +220,10 @@ namespace MasonOgCRM.DataAccess.EF
 		/// </summary>
 		/// <param name="note">Note object that contains the modified property values to update with.</param>
 		/// <returns></returns>
-		public async Task UpdateNoteAsync(Note note)
+		public void UpdateNote(Note note)
 		{
 			DBContext.Notes.AddOrUpdate(note);
-			await DBContext.SaveChangesAsync();
+			DBContext.SaveChanges();
 		}
 
 		/// <summary>
@@ -247,10 +231,10 @@ namespace MasonOgCRM.DataAccess.EF
 		/// </summary>
 		/// <param name="userAccount">UserAccoubt object that contains the modified property values to update with.</param>
 		/// <returns></returns>
-		public async Task UpdateUserAccountAsync(UserAccount userAccount)
+		public void UpdateUserAccount(UserAccount userAccount)
 		{
 			DBContext.UserAccounts.AddOrUpdate(userAccount);
-			await DBContext.SaveChangesAsync();
+			DBContext.SaveChanges();
 		}
 
 		/// <summary>
@@ -263,12 +247,12 @@ namespace MasonOgCRM.DataAccess.EF
 		}
 
 		/// <summary>
-		/// Get all User Account Id's from the database asynchronously.
+		/// Get all User Account Id's from the database.
 		/// </summary>
 		/// <returns></returns>
-		public async Task<List<int>> GetAllUserAccountIdsAsync()
+		public List<int> GetAllUserAccountIds()
 		{
-			return await DBContext.UserAccounts.Select(c => c.Id).ToListAsync();
+			return DBContext.UserAccounts.Select(c => c.Id).ToList();
 		}
 	}
 }

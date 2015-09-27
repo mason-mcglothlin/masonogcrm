@@ -24,64 +24,47 @@ namespace MasonOgCRM.DataAccess.InMemory
 			return Customers.Count;
 		}
 
-		public Task AddCustomerAsync(Customer customer)
+		public void AddCustomer(Customer customer)
 		{
 			customer.Id = randomNumberGenerator.Next();
 			Customers.Add(customer.Id, customer);
-			return Task.FromResult(0);
 		}
 
-		public Task AddNoteAsync(Note note)
+		public void AddNote(Note note)
 		{
 			note.Id = randomNumberGenerator.Next();
 			Notes.Add(note.Id, note);
-			return Task.FromResult(0);
 		}
 
-		public Task<List<int>> GetAllCustomerIdsAsync()
+		public List<int> GetAllCustomerIds()
 		{
-			var t = new Task<List<int>>(() => Customers.Keys.ToList());
-			t.Start();
-			return t;
+			return Customers.Keys.ToList();
 		}
 
-		public Task<List<int>> GetAllUserAccountIdsAsync()
+		public List<int> GetAllUserAccountIds()
 		{
-			var t = new Task<List<int>>(() => UserAccounts.Keys.ToList());
-			t.Start();
-			return t;
+			return UserAccounts.Keys.ToList();
 		}
 
-		public Task AddUserAccountAsync(UserAccount userAccount)
+		public void AddUserAccount(UserAccount userAccount)
 		{
 			userAccount.Id = randomNumberGenerator.Next();
 			UserAccounts.Add(userAccount.Id, userAccount);
-			return Task.FromResult(0);
 		}
 
-		public Task DeleteCustomerAsync(int id)
+		public void DeleteCustomer(int id)
 		{
 			Customers.Remove(id);
-			return Task.FromResult(0);
 		}
 
-		public Task DeleteNoteAsync(int id)
+		public void DeleteNote(int id)
 		{
 			Notes.Remove(id);
-			return Task.FromResult(0);
 		}
 
-		public Task DeleteUserAccountAsync(int id)
+		public void DeleteUserAccount(int id)
 		{
 			UserAccounts.Remove(id);
-			return Task.FromResult(0);
-		}
-
-		public Task<Customer> FindCustomerByIdAsync(int id)
-		{
-			var t = new Task<Customer>(() => Customers[id]);
-			t.Start();
-			return t;
 		}
 
 		public Customer FindCustomerById(int id)
@@ -89,78 +72,59 @@ namespace MasonOgCRM.DataAccess.InMemory
 			return Customers[id];
 		}
 
-		public Task<Note> FindNoteByIdAsync(int id)
+		public Note FindNoteById(int id)
 		{
-			var t = new Task<Note>(() => Notes[id]);
-			t.Start();
-			return t;
+			return Notes[id];
 		}
 
-		public Task<UserAccount> FindUserAccountByIdAsync(int id)
+		public UserAccount FindUserAccountById(int id)
 		{
-			var t = new Task<UserAccount>(() => UserAccounts[id]);
-			t.Start();
-			return t;
+			return UserAccounts[id];
 		}
 
-		public Task<List<Customer>> GetAllCustomersAsync()
+		public List<Customer> GetAllCustomers()
 		{
-			var t = new Task<List<Customer>>(() => Customers.Values.ToList());
-			t.Start();
-			return t;
+			return Customers.Values.ToList();
 		}
 
-		public Task<List<Customer>> GetAllCustomersAsync(Expression<Func<Customer, bool>> expression)
+		public List<Customer> GetAllCustomers(Expression<Func<Customer, bool>> expression)
 		{
-			var t = new Task<List<Customer>>( () => Customers.Values.AsQueryable().Where(expression).ToList());
-			t.Start();
-			return t;
+			return Customers.Values.AsQueryable().Where(expression).ToList();
 		}
 
-		public Task<List<Note>> GetAllNotesAsync()
+		public List<Note> GetAllNotes()
 		{
-			var t = new Task<List<Note>>(() => Notes.Values.ToList());
-			t.Start();
-			return t;
+			return Notes.Values.ToList();
 		}
 
-		public Task<List<Note>> GetAllNotesAsync(Expression<Func<Note, bool>> expression)
+		public List<Note> GetAllNotes(Expression<Func<Note, bool>> expression)
 		{
-			var t = new Task<List<Note>>(() => Notes.Values.AsQueryable().Where(expression).ToList());
-			t.Start();
-			return t;
+			return Notes.Values.AsQueryable().Where(expression).ToList();
 		}
 
-		public Task<List<UserAccount>> GetAllUserAccountsAsync()
+		public List<UserAccount> GetAllUserAccounts()
 		{			
-			var t = new Task<List<UserAccount>>(() => UserAccounts.Values.ToList());
-			t.Start();
-			return t;
+			return UserAccounts.Values.ToList();
 		}
 
-		public Task<List<UserAccount>> GetAllUserAccountsAsync(Expression<Func<UserAccount, bool>> expression)
+		public List<UserAccount> GetAllUserAccounts(Expression<Func<UserAccount, bool>> expression)
 		{
-			var t = new Task<List<UserAccount>>(() => UserAccounts.Values.AsQueryable().Where(expression).ToList());
-			t.Start();
-			return t;
+			return UserAccounts.Values.AsQueryable().Where(expression).ToList();
 		}
 
-		public Task UpdateCustomerAsync(Customer customer)
+		public void UpdateCustomer(Customer customer)
 		{
 			Customers[customer.Id] = customer;
-			return Task.FromResult(0);
 		}
 
-		public Task UpdateNoteAsync(Note note)
+		public void UpdateNote(Note note)
 		{
 			Notes[note.Id] = note;
-			return Task.FromResult(0);
 		}
 
-		public Task UpdateUserAccountAsync(UserAccount userAccount)
+		public void UpdateUserAccount(UserAccount userAccount)
 		{
 			UserAccounts[userAccount.Id] = userAccount;
-			return Task.FromResult(0);
 		}
 
 		public int GetUserAccountTotalCount()
