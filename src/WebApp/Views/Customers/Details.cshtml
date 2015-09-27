@@ -45,19 +45,21 @@
     </dl>
 </div>
 
-<div ng-app="myApp">
+<div>
     <h4>Notes</h4>
-    <p>List of notes here.</p>
-    <div ng-controller="NotesController">
-        <i class="fa fa-spinner fa-spin fa-2x" ng-if="loading"></i>
-        <div ng-if="loading == false">
-            <div ng-repeat="note in notes">
-                {{ note }}
-            </div>
-        </div>
+    <i class="fa fa-spinner fa-spin fa-2x" id="LoadingImage"></i>
+    <div id="NotesDiv">
+
     </div>
     <h4>Add Note</h4>
-    <p>form here for adding a note</p>
+    <form>
+        <div class="form-group">
+            <textarea id="NoteBody" placeholder="Enter note here" class="form-control" style="max-width: 450px"></textarea>
+        </div>
+        <div class="form-group">
+            <button type="button" id="SubmitNoteBtn" class="btn btn-primary">Submit Note</button>
+        </div>
+    </form>
 </div>
 
 <p>
@@ -65,12 +67,45 @@
     <a href="@Url.Action(nameof(CustomersController.Index), nameof(CustomersController).RemoveControllerFromName())">Back to List</a>
 </p>
 @section Scripts{
-    <script src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.6/angular.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.3/handlebars.min.js"></script>
     <script>
-        var app = angular.module('myApp', []);
-        app.controller('NotesController', function ($scope) {
-            $scope.notes = ['hello', 'world', 'test'];
-            $scope.loading = true;
+        function SuccessNoteAdd(note) {
+            console.log("Note successfully posted.");
+            GetAllNotes();
+        }
+
+        function GetAllNotes() {
+            $.get('@Url.Content("~/api/Notes/"+Model.Id)', SuccessRetrieveNotes);
+        }
+
+        function SuccessRetrieveNotes(data) {
+            $("#LoadingImage").hide();
+            console.log('Retrieved: ' + data);
+            var html = template({ notes: data });
+            $("#NotesDiv").html(html);
+            console.log("Processed HTML: " + html);
+        }
+
+        var template = null; //only want to compile once
+
+        $(function () {
+            GetAllNotes();
+            var source = $("#notes-template").html();
+            template = Handlebars.compile(source);
+
+            $("#SubmitNoteBtn").click(function () {
+                console.log("Submitting note...");
+                var note = { Body: $("#NoteBody").val(), CustomerId: '@Model.Id' };
+                $.post('@Url.Content("~/api/Notes")', note, SuccessNoteAdd(note));
+            });
         });
     </script>
+
 }
+<script id="notes-template" type="text/x-handlebars-template">
+    {{#each notes}}
+    <div class="social-comment">
+        {{Body}} - {{CreatedByUserName}}
+    </div>
+    {{/each}}
+</script>

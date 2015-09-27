@@ -267,6 +267,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ApiControllers\CustomersController.cs" />
+    <Compile Include="ApiControllers\NotesController.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\NinjectWebCommon.cs" />
     <Compile Include="App_Start\RazorPageHelperExtensions.cs" />

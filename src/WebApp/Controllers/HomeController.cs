@@ -28,7 +28,7 @@ namespace MasonOgCRM.WebApp.Controllers
 			return View();
 		}
 
-		public ActionResult PerformSeed()
+		public async Task<ActionResult> PerformSeed()
 		{
 			var tasks = new List<Task>();
 
@@ -50,6 +50,33 @@ namespace MasonOgCRM.WebApp.Controllers
 			tasks.Add(Repository.AddUserAccountAsync(new UserAccount() { FirstName = "Jade", LastName = "Fire", EmailAddress = "jade@ogsys.com" }));
 
 			Task.WaitAll(tasks.ToArray());
+
+			var random = new Random();
+			var customers = await Repository.GetAllCustomerIdsAsync();
+			var users = await Repository.GetAllUserAccountsAsync();
+
+			var noteTasks = new List<Task>();
+			#region Long Lorum ipsum
+			var noteText = @"
+					Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus vehicula finibus dignissim. Curabitur porta luctus tristique. Nunc condimentum suscipit augue, quis feugiat tellus pretium condimentum. Mauris non dui non ex commodo volutpat. In molestie tortor id lorem sollicitudin convallis. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Phasellus congue scelerisque elit quis malesuada. Pellentesque auctor, ipsum vel mattis pharetra, nulla mi pretium leo, at maximus augue mauris in arcu.
+
+Maecenas vel velit lorem. Cras pharetra turpis sed metus sollicitudin, a fringilla eros feugiat. Sed sodales turpis non odio faucibus, eget ullamcorper urna vulputate. Quisque accumsan porttitor dui eget elementum. Morbi eget nunc vitae justo mollis consectetur a non diam. Vivamus elit sapien, dignissim ut condimentum at, blandit id odio. Vivamus suscipit nulla at rhoncus scelerisque. Suspendisse ultrices augue odio. Vestibulum non neque massa.
+";
+			#endregion
+
+			foreach (var customerId in customers)
+			{
+				var numNotes = random.Next(1, 5);
+				for (int i = 1; i <= numNotes; i++)
+				{
+					int userIndex = random.Next(0, users.Count - 1);
+					var user = users[userIndex];
+					Note note = new Note() { Body = noteText, CustomerId = customerId, CreatedByUserName = $"{user.FirstName} {user.LastName}" };
+					noteTasks.Add(Repository.AddNoteAsync(note));
+				}
+			}
+			Task.WaitAll(noteTasks.ToArray());
+
 			return RedirectToAction(nameof(HomeController.Index));
 		}
 
@@ -65,6 +92,11 @@ namespace MasonOgCRM.WebApp.Controllers
 			foreach (var id in await Repository.GetAllUserAccountIdsAsync())
 			{
 				tasks.Add(Repository.DeleteUserAccountAsync(id));
+			}
+
+			foreach (var note in await Repository.GetAllNotesAsync())
+			{
+				tasks.Add(Repository.DeleteNoteAsync(note.Id));
 			}
 
 			Task.WaitAll(tasks.ToArray());
