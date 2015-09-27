@@ -68,7 +68,7 @@
 @section Scripts{
     <script src="//cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.3/handlebars.min.js"></script>
     <script>
-        function SuccessNoteAdd(note) {
+        function SuccessNoteAdd() {
             console.log("Note successfully posted.");
             GetAllNotes();
         }
@@ -88,14 +88,16 @@
         var template = null; //only want to compile once
 
         $(function () {
-            GetAllNotes();
             var source = $("#notes-template").html();
             template = Handlebars.compile(source);
+
+            GetAllNotes();
+            
 
             $("#SubmitNoteBtn").click(function () {
                 console.log("Submitting note...");
                 var note = { Body: $("#NoteBody").val(), CustomerId: '@Model.Id' };
-                $.post('@Url.Content("~/api/Notes")', note, SuccessNoteAdd(note));
+                $.post('@Url.Content("~/api/Notes")', note, SuccessNoteAdd);
             });
         });
     </script>
