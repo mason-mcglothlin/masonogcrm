@@ -62,9 +62,7 @@ else
                     @Html.DisplayFor(modelItem => customer.PhoneNumber)
                 </td>
                 <td>
-                    @Html.ActionLink("Edit", "Edit", new { id = customer.Id }) |
-                    <a href="@Url.Action(nameof(CustomersController.Details), nameof(CustomersController).RemoveControllerFromName(), new { id = customer.Id })">Details</a> |
-                    @Html.ActionLink("Delete", "Delete", new { id = customer.Id })
+                    <a href="@Url.Action(nameof(CustomersController.Details), nameof(CustomersController).RemoveControllerFromName(), new { id = customer.Id })" class="btn btn-info btn-sm">Details</a>
                 </td>
             </tr>}
         </table>
