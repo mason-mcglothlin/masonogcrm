@@ -166,6 +166,33 @@
     <Content Include="Content\animate.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\Favicon\android-icon-144x144.png" />
+    <Content Include="Content\Favicon\android-icon-192x192.png" />
+    <Content Include="Content\Favicon\android-icon-36x36.png" />
+    <Content Include="Content\Favicon\android-icon-48x48.png" />
+    <Content Include="Content\Favicon\android-icon-72x72.png" />
+    <Content Include="Content\Favicon\android-icon-96x96.png" />
+    <Content Include="Content\Favicon\apple-icon-114x114.png" />
+    <Content Include="Content\Favicon\apple-icon-120x120.png" />
+    <Content Include="Content\Favicon\apple-icon-144x144.png" />
+    <Content Include="Content\Favicon\apple-icon-152x152.png" />
+    <Content Include="Content\Favicon\apple-icon-180x180.png" />
+    <Content Include="Content\Favicon\apple-icon-57x57.png" />
+    <Content Include="Content\Favicon\apple-icon-60x60.png" />
+    <Content Include="Content\Favicon\apple-icon-72x72.png" />
+    <Content Include="Content\Favicon\apple-icon-76x76.png" />
+    <Content Include="Content\Favicon\apple-icon-precomposed.png" />
+    <Content Include="Content\Favicon\apple-icon.png" />
+    <Content Include="Content\Favicon\browserconfig.xml" />
+    <Content Include="Content\Favicon\favicon-16x16.png" />
+    <Content Include="Content\Favicon\favicon-32x32.png" />
+    <Content Include="Content\Favicon\favicon-96x96.png" />
+    <Content Include="Content\Favicon\favicon.ico" />
+    <Content Include="Content\Favicon\ms-icon-144x144.png" />
+    <Content Include="Content\Favicon\ms-icon-150x150.png" />
+    <Content Include="Content\Favicon\ms-icon-310x310.png" />
+    <Content Include="Content\Favicon\ms-icon-70x70.png" />
+    <Content Include="Content\icon_128.png" />
     <Content Include="Content\OgCRM.css" />
     <Content Include="Content\patterns\1.png" />
     <Content Include="Content\patterns\2.png" />
@@ -225,6 +252,7 @@
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="Content\Favicon\manifest.json" />
     <None Include="Scripts\jquery-2.1.1.intellisense.js" />
     <Content Include="Scripts\jquery-2.1.1.js" />
     <Content Include="Scripts\jquery-2.1.1.min.js" />
@@ -252,6 +280,7 @@
     <Content Include="Views\Shared\_Footer.cshtml" />
     <Content Include="Scripts\jquery-2.1.1.min.map" />
     <Content Include="Views\Home\DemoSetup.cshtml" />
+    <Content Include="Views\Shared\_Favicon.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
