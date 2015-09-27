@@ -4,6 +4,7 @@
 namespace MasonOgCRM.WebApp.App_Start
 {
 	using System;
+	using System.Configuration;
 	using System.Web;
 	using System.Web.Mvc;
 	using DataAccess.Common;
@@ -47,7 +48,7 @@ namespace MasonOgCRM.WebApp.App_Start
 			try
 			{
 				kernel.Bind<Func<IKernel>>().ToMethod(ctx => () => new Bootstrapper().Kernel);
-				kernel.Bind<IHttpModule>().To<HttpApplicationInitializationHttpModule>();				
+				kernel.Bind<IHttpModule>().To<HttpApplicationInitializationHttpModule>();
 				RegisterServices(kernel);
 				return kernel;
 			}
@@ -67,9 +68,36 @@ namespace MasonOgCRM.WebApp.App_Start
 			kernel.BindFilter<LayoutViewModelInjectorAttribute>(FilterScope.Global, 0);
 			kernel.BindFilter<HandleErrorAttribute>(FilterScope.Global, 0);
 
-			//kernel.Bind<IOgCRMRepository>().To<InMemoryRepository>().InSingletonScope();
+			if (ConfigurationManager.AppSettings["Repository"] != null)
+			{
+				if (ConfigurationManager.AppSettings["Repository"] == "InMemory")
+				{
+					RegisterInMemoryRepository(kernel);
+				}
+				else if (ConfigurationManager.AppSettings["Repository"] == "SqlServerLocalDatabase")
+				{
+					RegisterEFRepository(kernel);
+				}
+				else
+				{
+					throw new ApplicationException("Invalid appSetting for Repository. Valid values are SqlServerLocalDatabase and InMemeory.");
+				}
+			}
+			else
+			{
+				throw new ApplicationException("Unsure of what repository to use. Configure appSettings Repository key with SqlServerLocalDatabase or InMemory.");
+			}
+		}
+
+		private static void RegisterEFRepository(IKernel kernel)
+		{
 			var dbContext = new EFDBContext("SqlServerLocalDb");
-            kernel.Bind<IOgCRMRepository>().ToMethod((IContext) => new EntityFrameworkRepository(dbContext));
+			kernel.Bind<IOgCRMRepository>().ToMethod((IContext) => new EntityFrameworkRepository(dbContext));
+		}
+
+		private static void RegisterInMemoryRepository(IKernel kernel)
+		{
+			kernel.Bind<IOgCRMRepository>().To<InMemoryRepository>().InSingletonScope();
 		}
 	}
 }
