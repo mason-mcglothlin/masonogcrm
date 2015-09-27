@@ -57,9 +57,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AsyncEFQueryProvider.cs" />
     <Compile Include="EntityFrameworkRepositoryTests.cs" />
-    <Compile Include="EntityFrameworkRepositoryTestsAsync.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

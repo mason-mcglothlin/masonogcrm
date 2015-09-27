@@ -76,5 +76,48 @@ namespace DataAccess.EF.Tests
 			mockSet.Verify(c => c.Add(It.IsAny<Customer>()));
 			dbContext.Verify(c => c.SaveChanges());
 		}
+
+
+		[Test]
+		public void DeleteCustomer()
+		{
+			//Arrange
+			var repository = new EntityFrameworkRepository(dbContext.Object);
+
+			//Act
+			repository.DeleteCustomer(mason.Id);
+
+			//Assert
+			dbContext.Verify(c => c.SetState(mason, EntityState.Deleted));
+			dbContext.Verify(c => c.SaveChanges());
+		}
+
+		[Test]
+		public void GetAllCustomers()
+		{
+			//Arrange
+			var repository = new EntityFrameworkRepository(dbContext.Object);
+
+			//Act
+			var customers = repository.GetAllCustomers();
+
+			//Assert
+			Assert.IsNotNull(customers);
+			Assert.AreEqual(mockSet.Object.Count(), customers.Count);
+		}
+
+		[Test]
+		public void GetAllCustomersByExpression()
+		{
+			//Arrange
+			var repository = new EntityFrameworkRepository(dbContext.Object);
+
+			//Act
+			var customers = repository.GetAllCustomers(c => c.CompanyName.Contains("Inc"));
+
+			//Assert
+			Assert.IsNotNull(customers);
+			Assert.AreEqual(2, customers.Count);
+		}
 	}
 }

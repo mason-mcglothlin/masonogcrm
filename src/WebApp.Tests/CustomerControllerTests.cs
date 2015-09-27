@@ -7,6 +7,7 @@ using System.Web.Mvc;
 using MasonOgCRM.DataAccess.Common;
 using MasonOgCRM.DomainModels;
 using MasonOgCRM.WebApp.Controllers;
+using MasonOgCRM.WebApp.ViewModels;
 using Moq;
 using NUnit.Framework;
 
@@ -23,21 +24,24 @@ namespace WebApp.Tests
 			}.ToList();
 
 		[Test]
-		public async Task Index()
+		public void Index()
 		{
 			//Arrange
 			var repository = new Mock<IOgCRMRepository>();
-			repository.Setup(r => r.GetAllCustomersAsync()).ReturnsAsync(sampleCustomerData);
+			repository.Setup(r => r.GetAllCustomers()).Returns(sampleCustomerData);
 			var customerController = new CustomersController(repository.Object);
 
 			//Act
-			var result = await customerController.Index();
+			var result = customerController.Index();
 
 			//Assert
 			Assert.IsInstanceOf<ViewResult>(result);
 			var viewResult = result as ViewResult;
-			Assert.IsInstanceOf<IEnumerable<Customer>>(viewResult.Model);
-			Assert.AreEqual(sampleCustomerData.Count, (viewResult.Model as IEnumerable<Customer>).Count());
+			Assert.IsInstanceOf<CustomersIndexViewModel>(viewResult.Model);
+			var viewModel = viewResult.Model as CustomersIndexViewModel;
+
+			Assert.IsInstanceOf<IEnumerable<Customer>>(viewModel.AllCustomersList);
+			Assert.AreEqual(sampleCustomerData.Count, (viewModel.AllCustomersList as IEnumerable<Customer>).Count());
 		}
 	}
 }
