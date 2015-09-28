@@ -42,6 +42,14 @@
                     </li>
                 </ul>
             </li>
+            <li>
+                <a href="javascript:document.getElementById('logoutForm').submit()"><i class="fa fa-sign-out"></i> @User.Identity.Name - Log off</a>
+            </li>
         </ul>
     </div>
 </nav>
+
+@using (Html.BeginForm(nameof(UserAccountController.PerformLogout), nameof(UserAccountController).RemoveControllerFromName(), FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
+{
+    @Html.AntiForgeryToken()
+}

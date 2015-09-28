@@ -1,0 +1,27 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>
+        @ViewBag.Title@if (!String.IsNullOrEmpty(ViewBag.Title))
+        {<text> | </text>} OgCRM
+    </title>
+    @Styles.Render("~/Content/css")
+    @Styles.Render("~/font-awesome/css")
+    @Html.Partial("_Favicon")
+    <link href="@Url.Content("~/Content/OgCRM.css")" rel="stylesheet" />
+</head>
+<body>
+    <div>
+        @RenderBody()
+    </div>
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/plugins/metsiMenu")
+    @Scripts.Render("~/plugins/pace")
+    @Scripts.Render("~/plugins/slimScroll")
+    @Scripts.Render("~/bundles/inspinia")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

@@ -1,22 +1,24 @@
 ﻿
 @{
+    Layout = "~/Views/Shared/_UnauthenticatedLayout.cshtml";
     ViewBag.Title = "Login";
 }
 
 <h2>OgCRM Login</h2>
 
-<form>
+@using (Html.BeginForm(nameof(UserAccountController.Login), nameof(UserAccountController).RemoveControllerFromName()))
+{
     <div class="form-group">
-        <label for="exampleInputEmail1">Email address</label>
-        <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Email">
+        <label for="EmailTB">Email address</label>
+        <input type="email" class="form-control" id="EmailTB" placeholder="Email">
     </div>
     <div class="form-group">
-        <label for="exampleInputPassword1">Password</label>
-        <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+        <label for="PasswordTB">Password</label>
+        <input type="password" class="form-control" id="PasswordTB" placeholder="Password">
     </div>
-    <button type="submit" class="btn btn-primary">Submit</button>
-</form>
+    <button type="submit" class="btn btn-primary"><i class="fa fa-sign-in"></i> Login</button>
+}
 
 <div>
-<a href="#" class="btn btn-primary pull-right">Register</a>
+<a href="@Url.Action(nameof(UserAccountController.Register), nameof(UserAccountController).RemoveControllerFromName())" class="btn btn-primary pull-right">Register</a>
 </div>

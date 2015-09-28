@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MasonOgCRM.WebApp.Razor
+namespace MasonOgCRM.WebApp.Helpers
 {
 	public static class RazorPageHelperExtensions
 	{
