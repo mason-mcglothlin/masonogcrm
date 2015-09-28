@@ -283,6 +283,7 @@
     <Content Include="Scripts\jquery-2.1.1.min.map" />
     <Content Include="Views\Home\DemoSetup.cshtml" />
     <Content Include="Views\Shared\_Favicon.cshtml" />
+    <Content Include="Views\UserAccount\Login.cshtml" />
     <None Include="Web.Azure Testing.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

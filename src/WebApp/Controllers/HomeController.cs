@@ -49,7 +49,7 @@ namespace MasonOgCRM.WebApp.Controllers
 
 			var random = new Random();
 			var customers = Repository.GetAllCustomerIds();
-			var users =  Repository.GetAllUserAccounts();
+			var users = Repository.GetAllUserAccounts();
 
 			#region Long Lorum ipsum
 			var noteText = @"
@@ -73,7 +73,7 @@ Maecenas vel velit lorem. Cras pharetra turpis sed metus sollicitudin, a fringil
 			return RedirectToAction(nameof(HomeController.Index));
 		}
 
-		public  ActionResult PerformEmpty()
+		public ActionResult PerformEmpty()
 		{
 			foreach (var id in Repository.GetAllCustomerIds())
 			{

@@ -34,5 +34,9 @@ namespace MasonOgCRM.WebApp.Controllers
 			return RedirectToAction(nameof(UserAccountController.Index));
 		}
 
-    }
+		public ActionResult Login()
+		{
+			return View();
+		}
+	}
 }

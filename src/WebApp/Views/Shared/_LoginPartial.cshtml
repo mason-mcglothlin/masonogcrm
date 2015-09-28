@@ -5,9 +5,6 @@
     @Html.AntiForgeryToken()
 
         <ul class="nav navbar-top-links navbar-right">
-            <li>
-                @Html.ActionLink("Hello " + User.Identity.Name + "!", "Manage", "Account", routeValues: null, htmlAttributes: new { title = "Manage" })
-            </li>
             <li><a href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>
         </ul>
     }
@@ -15,7 +12,7 @@
 else
 {
         <ul class="nav navbar-top-links navbar-right">
-            <li>@Html.ActionLink("Register", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
-            <li>@Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
-        </ul>
+            <li><a href="@Url.Action(nameof(UserAccountController.New), nameof(UserAccountController).RemoveControllerFromName())">Register</a>
+            <li><a href="@Url.Action(nameof(UserAccountController.Login), nameof(UserAccountController).RemoveControllerFromName())">Login</a>
+</ul>
 }
