@@ -7,8 +7,15 @@ using System.Web.Optimization;
 
 namespace MasonOgCRM.WebApp.App_Start
 {
+	/// <summary>
+	/// Class to configure JS and CSS bundles needed by the website.
+	/// </summary>
 	public class BundleConfig
 	{
+		/// <summary>
+		/// Performs the creation and registration of bundles with the framework.
+		/// </summary>
+		/// <param name="bundles">Collection of Bundle objects that the bundles will be added to.</param>
 		public static void RegisterBundles(BundleCollection bundles)
 		{
 			// Vendor scripts

@@ -57,6 +57,11 @@ namespace MasonOgCRM.DataAccess.EF
 		/// </summary>
 		public DbSet<UserAccount> UserAccounts { get; set; }
 
+		/// <summary>
+		/// Set the state of an object in the DbContext to a specific EntityState.
+		/// </summary>
+		/// <param name="entity">The entity that the state will be modified on.</param>
+		/// <param name="state">The state to change the entity to.</param>
 		public void SetState(object entity, EntityState state)
 		{
 			Entry(entity).State = state;

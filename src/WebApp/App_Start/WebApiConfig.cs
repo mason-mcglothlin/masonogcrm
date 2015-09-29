@@ -9,8 +9,15 @@ using MasonOgCRM.WebApp.Filters;
 
 namespace MasonOgCRM.WebApp.App_Start
 {
+	/// <summary>
+	/// Class for configuration of Web API settings
+	/// </summary>
 	public static class WebApiConfig
 	{
+		/// <summary>
+		/// Sets up Web API routes and filters.
+		/// </summary>
+		/// <param name="config">Configuration object to register the settings with.</param>
 		public static void Register(HttpConfiguration config)
 		{
 			config.MapHttpAttributeRoutes();

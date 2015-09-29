@@ -16,6 +16,9 @@ namespace MasonOgCRM.WebApp.App_Start
 	using Ninject.Web.Common;
 	using Ninject.Web.Mvc.FilterBindingSyntax;
 
+	/// <summary>
+	/// Class to set up Ninject and configure dependencies.
+	/// </summary>
 	public static class NinjectWebCommon
 	{
 		private static readonly Bootstrapper bootstrapper = new Bootstrapper();
@@ -91,12 +94,20 @@ namespace MasonOgCRM.WebApp.App_Start
 			}
 		}
 
+		/// <summary>
+		/// Register an Entity Framework repository to resolve the IOgCRMRepository dependency.
+		/// </summary>
+		/// <param name="kernel">Kernel to register the dependency with.</param>
 		private static void RegisterEFRepository(IKernel kernel)
 		{
 			var dbContext = new EFDBContext("SqlServerLocalDb");
 			kernel.Bind<IOgCRMRepository>().ToMethod((IContext) => new EntityFrameworkRepository(dbContext, new PasswordHasher()));
 		}
 
+		/// <summary>
+		/// Register an In Memory repository to resolve the IOgCRMRepository dependency.
+		/// </summary>
+		/// <param name="kernel">Kernel to register the dependency with.</param>
 		private static void RegisterInMemoryRepository(IKernel kernel)
 		{
 			kernel.Bind<IOgCRMRepository>().To<InMemoryRepository>().InSingletonScope();

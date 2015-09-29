@@ -9,25 +9,44 @@ using MasonOgCRM.DomainModels;
 
 namespace MasonOgCRM.WebApp.Controllers
 {
+	/// <summary>
+	/// Home controller for the site, for action methods that don't directly deal with specific entity collections.
+	/// </summary>
 	public class HomeController : Controller
 	{
 		private readonly IOgCRMRepository Repository;
 
+		/// <summary>
+		/// Create an instance of this controller with the necessary dependencies.
+		/// </summary>
+		/// <param name="repository">Repository to perform CRUD operations on entities.</param>
 		public HomeController(IOgCRMRepository repository)
 		{
 			Repository = repository;
 		}
 
+		/// <summary>
+		/// Basic homepage, just a welcome message.
+		/// </summary>
+		/// <returns></returns>
 		public ActionResult Index()
 		{
 			return View();
 		}
 
+		/// <summary>
+		/// Page for manipulating the demo to quickly prepopulate and remove data.
+		/// </summary>
+		/// <returns>Page allowing user to seed the database or remove its contents.</returns>
 		public ActionResult DemoSetup()
 		{
 			return View();
 		}
 
+		/// <summary>
+		/// Seed the database with sample customer, user accounts, and note objects.
+		/// </summary>
+		/// <returns>A redirect back to the home page.</returns>
 		public ActionResult PerformSeed()
 		{
 			Repository.AddCustomer(new Customer() { FirstName = "Nancy", LastName = "Stevens", CompanyName = "Acme Inc", PhoneNumber = "111-111-1111", Address = "1 Harvard Way", EmailAddress = "nancy@harvard.com" });
@@ -73,6 +92,10 @@ Maecenas vel velit lorem. Cras pharetra turpis sed metus sollicitudin, a fringil
 			return RedirectToAction(nameof(HomeController.Index));
 		}
 
+		/// <summary>
+		/// Removes all customers, notes, and user accounts from the repository.
+		/// </summary>
+		/// <returns>A redirect back to the home page.</returns>
 		public ActionResult PerformEmpty()
 		{
 			foreach (var id in Repository.GetAllCustomerIds())

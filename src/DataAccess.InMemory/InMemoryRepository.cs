@@ -9,6 +9,9 @@ using MasonOgCRM.DomainModels;
 
 namespace MasonOgCRM.DataAccess.InMemory
 {
+	/// <summary>
+	/// In memory repository of entities. Used for testing.
+	/// </summary>
 	public class InMemoryRepository : IOgCRMRepository
 	{
 		private Dictionary<int, Customer> Customers { get; } = new Dictionary<int, Customer>();

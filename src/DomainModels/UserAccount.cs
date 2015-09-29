@@ -36,6 +36,9 @@ namespace MasonOgCRM.DomainModels
 		[DisplayName("Email Address")]
 		public string EmailAddress { get; set; }
 
+		/// <summary>
+		/// Password of the user. Prior to being saved in the database, this is cleartext. Once in the database, the password is hashed and salted.
+		/// </summary>
 		public string Password { get; set; }
 	}
 }

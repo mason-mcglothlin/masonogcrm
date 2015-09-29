@@ -8,8 +8,15 @@ using System.Web.Routing;
 
 namespace MasonOgCRM.WebApp.App_Start
 {
+	/// <summary>
+	/// Class to configure routes for MVC in the application.
+	/// </summary>
 	public class RouteConfig
 	{
+		/// <summary>
+		/// Registers routes with the MVC framework by modifying the RouteCollection.
+		/// </summary>
+		/// <param name="routes">Collection of routes for the routes to be added to.</param>
 		public static void RegisterRoutes(RouteCollection routes)
 		{
 			routes.IgnoreRoute("{resource}.axd/{*pathInfo}");

@@ -9,6 +9,10 @@ using MasonOgCRM.DomainModels;
 
 namespace MasonOgCRM.DataAccess.EF
 {
+
+	/// <summary>
+	/// Defines the interface that the Entity Framework DbContext will provide for the repository. Inteface used to faciliate DI.
+	/// </summary>
 	public interface IDbContext
 	{
 		DbSet<Customer> Customers {get; set; }

@@ -10,11 +10,18 @@ using Ninject;
 
 namespace MasonOgCRM.WebApp.Filters
 {
+	/// <summary>
+	/// Attribute to apply to MVC action methods to ensure that a valid ID is received from the route values.
+	/// </summary>
 	public class CustomerIdExistsAttribute : ActionFilterAttribute
 	{
 		[Inject]
 		public IOgCRMRepository Repository { get; set; }
 
+		/// <summary>
+		/// Verifies that the id from the route values is valid. If it is not valid, a NotFound view result is returned.
+		/// </summary>
+		/// <param name="filterContext">Context describing the state of the route data and allowing the result to be manipulated.</param>
 		public override void OnActionExecuting(ActionExecutingContext filterContext)
 		{
 			var idObj = filterContext.RouteData.Values["id"];
