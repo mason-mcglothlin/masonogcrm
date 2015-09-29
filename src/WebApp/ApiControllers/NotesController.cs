@@ -34,6 +34,10 @@ namespace MasonOgCRM.WebApp.ApiControllers
 		[HttpPost]
 		public void Post([FromBody]Note note)
 		{
+			var user = Repository.GetAllUserAccounts(u => u.EmailAddress.ToLower() == User.Identity.Name.ToLower()).First();
+			var name = user.FirstName + " " + user.LastName;
+			var hasName = (user.FirstName + user.LastName).Length > 0 ? true : false;
+			note.CreatedByUserName = hasName ? name : "User " + user.Id;
 			Repository.AddNote(note);
 		}
 
