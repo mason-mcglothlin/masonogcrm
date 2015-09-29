@@ -60,7 +60,7 @@ namespace MasonOgCRM.WebApp.Controllers
 		public ActionResult Register(UserAccount account)
 		{
 			Repository.AddUserAccount(account);
-			return RedirectToAction(nameof(UserAccountController.Index));
+			return RedirectToAction(nameof(UserAccountController.Login));
 		}
 
 		public ActionResult PerformLogout()

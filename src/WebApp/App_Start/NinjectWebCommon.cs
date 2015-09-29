@@ -67,6 +67,7 @@ namespace MasonOgCRM.WebApp.App_Start
 		{
 			kernel.BindFilter<LayoutViewModelInjectorAttribute>(FilterScope.Global, 0);
 			kernel.BindFilter<HandleErrorAttribute>(FilterScope.Global, 0);
+			kernel.BindFilter<AuthorizeAttribute>(FilterScope.Global, 0);
 
 			if (ConfigurationManager.AppSettings["Repository"] != null)
 			{

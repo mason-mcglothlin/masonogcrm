@@ -4,10 +4,12 @@
     ViewBag.Title = "Login";
 }
 
-<h2>OgCRM Login</h2>
+<h2>OgCRM</h2>
+<h4>Login</h4>
 
 @using (Html.BeginForm(nameof(UserAccountController.Login), nameof(UserAccountController).RemoveControllerFromName()))
 {
+    @Html.AntiForgeryToken()
     <div class="form-group">
         <label for="EmailTB">Email address</label>
         <input type="email" class="form-control" id="EmailTB" placeholder="Email">
@@ -16,9 +18,7 @@
         <label for="PasswordTB">Password</label>
         <input type="password" class="form-control" id="PasswordTB" placeholder="Password">
     </div>
-    <button type="submit" class="btn btn-primary"><i class="fa fa-sign-in"></i> Login</button>
+    <button type="submit" class="btn btn-primary block full-width m-b"><i class="fa fa-sign-in"></i> Login</button>
 }
-
-<div>
-<a href="@Url.Action(nameof(UserAccountController.Register), nameof(UserAccountController).RemoveControllerFromName())" class="btn btn-primary pull-right">Register</a>
-</div>
+<p class="text-muted text-center"><small>Do not have an account?</small></p>
+<a href="@Url.Action(nameof(UserAccountController.Register), nameof(UserAccountController).RemoveControllerFromName())" class="btn btn-default btn-white btn-block">Register</a>
