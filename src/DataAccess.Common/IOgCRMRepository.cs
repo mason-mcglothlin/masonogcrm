@@ -159,5 +159,13 @@ namespace MasonOgCRM.DataAccess.Common
 		/// <param name="userAccount">Note to add the repository.</param>
 		/// <returns></returns>
 		void AddNote(Note note);
+
+		/// <summary>
+		/// Authenticate a user against a user account in the database.
+		/// </summary>
+		/// <param name="username">The username to authenticate against.</param>
+		/// <param name="password">The password to authenticate against.</param>
+		/// <returns>True if the authentication succeeds, otherwise false.</returns>
+		bool AuthenticateUser(string emailAddress, string password);
 	}
 }

@@ -103,7 +103,7 @@ namespace MasonOgCRM.DataAccess.InMemory
 		}
 
 		public List<UserAccount> GetAllUserAccounts()
-		{			
+		{
 			return UserAccounts.Values.ToList();
 		}
 
@@ -131,5 +131,24 @@ namespace MasonOgCRM.DataAccess.InMemory
 		{
 			return UserAccounts.Count;
 		}
+
+		/// <summary>
+		/// Authenticate a user against a user account in the database.
+		/// </summary>
+		/// <param name="username">The username to authenticate against.</param>
+		/// <param name="password">The password to authenticate against.</param>
+		/// <returns>True if the authentication succeeds, otherwise false.</returns>
+		public bool AuthenticateUser(string emailAddress, string password)
+		{
+			if (UserAccounts.Where(kvp => kvp.Value.EmailAddress==emailAddress).Count() > 0 && UserAccounts.Where(kvp => kvp.Value.EmailAddress == emailAddress).First().Value.Password == password)
+			{
+				return true;
+			}
+			else
+			{
+				return false;
+			}
+		}
+
 	}
 }

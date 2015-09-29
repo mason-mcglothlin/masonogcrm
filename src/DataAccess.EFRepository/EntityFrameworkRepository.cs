@@ -180,7 +180,7 @@ namespace MasonOgCRM.DataAccess.EF
 		/// Retrieve all Note objects from the repository.
 		/// </summary>
 		/// <returns></returns>
-		public  List<Note> GetAllNotes()
+		public List<Note> GetAllNotes()
 		{
 			return DBContext.Notes.ToList();
 		}
@@ -253,6 +253,30 @@ namespace MasonOgCRM.DataAccess.EF
 		public List<int> GetAllUserAccountIds()
 		{
 			return DBContext.UserAccounts.Select(c => c.Id).ToList();
+		}
+
+		/// <summary>
+		/// Authenticate a user against a user account in the database.
+		/// </summary>
+		/// <param name="username">The username to authenticate against.</param>
+		/// <param name="password">The password to authenticate against.</param>
+		/// <returns>True if the authentication succeeds, otherwise false.</returns>
+		public bool AuthenticateUser(string emailAddress, string password)
+		{
+			var account = DBContext.UserAccounts.Where(ua => ua.EmailAddress == emailAddress).FirstOrDefault();
+			if (account == null)
+			{
+				return false;
+			}
+			if (account.Password == password)
+			{
+				return true;
+			}
+			else
+			{
+				return false;
+			}
+
 		}
 	}
 }

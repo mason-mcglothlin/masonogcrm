@@ -8,6 +8,7 @@ using System.Web.Security;
 using MasonOgCRM.DataAccess.Common;
 using MasonOgCRM.DomainModels;
 using MasonOgCRM.WebApp.Helpers;
+using MasonOgCRM.WebApp.ViewModels;
 
 namespace MasonOgCRM.WebApp.Controllers
 {
@@ -43,16 +44,25 @@ namespace MasonOgCRM.WebApp.Controllers
 		}
 
 		[AllowAnonymous]
-		public ActionResult Register() {
+		public ActionResult Register()
+		{
 			return View();
 		}
 
 		[AllowAnonymous]
 		[HttpPost]
-		public ActionResult Login(string returnUrl)
+		public ActionResult Login(LoginSubmitViewModel loginViewModel, string returnUrl)
 		{
-			FormsAuthentication.SetAuthCookie("username", false);
-			return Redirect(returnUrl ?? Url.Action(nameof(HomeController.Index), nameof(HomeController).RemoveControllerFromName()));
+			bool success = Repository.AuthenticateUser(loginViewModel.EmailAddress, loginViewModel.Password);
+			if (success)
+			{
+				FormsAuthentication.SetAuthCookie(loginViewModel.EmailAddress, false);
+				return Redirect(returnUrl ?? Url.Action(nameof(HomeController.Index), nameof(HomeController).RemoveControllerFromName()));
+			}
+			else
+			{
+				return View();
+			}
 		}
 
 		[AllowAnonymous]

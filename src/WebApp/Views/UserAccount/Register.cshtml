@@ -34,6 +34,12 @@
         @Html.ValidationMessageFor(model => model.EmailAddress, "", new { @class = "text-danger" })
     </div>
 
-        <input type="submit" value="Create" class="btn btn-primary block full-width m-b" />
+    <div class="form-group">
+        @Html.LabelFor(model => model.Password)
+        @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control", placeholder = "Password", type="password" } })
+        @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+    </div>
+
+        <input type="submit" value="Register" class="btn btn-primary block full-width m-b" />
 }
 <a href="@Url.Action(nameof(UserAccountController.Login), nameof(UserAccountController).RemoveControllerFromName())" class="btn btn-default btn-white btn-block">I Already Have An Account</a>
