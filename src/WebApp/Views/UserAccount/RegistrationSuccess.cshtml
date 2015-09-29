@@ -1,0 +1,10 @@
+﻿
+@{
+    ViewBag.Title = "Registration Success";
+    Layout = "~/Views/Shared/_UnauthenticatedLayout.cshtml";
+}
+
+<h2>OgCRM</h2>
+<h4>Registration Success</h4>
+<p>You have successfully registered.</p>
+<a href="@Url.Action(nameof(UserAccountController.Login), nameof(UserAccountController).RemoveControllerFromName())" class="btn btn-primary btn-block">Login Page</a>

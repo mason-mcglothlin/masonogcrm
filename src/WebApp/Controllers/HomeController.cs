@@ -41,11 +41,11 @@ namespace MasonOgCRM.WebApp.Controllers
 			Repository.AddCustomer(new Customer() { FirstName = "Mason", LastName = "McGlothlin", CompanyName = "Oil and Gas Information Systems", PhoneNumber = "888-888-8888", Address = "10 River Park Drive", EmailAddress = "mason@masonmcg.com" });
 			Repository.AddCustomer(new Customer() { FirstName = "John", LastName = "Woo", CompanyName = "Landsberg Co", PhoneNumber = "999-999-9999", Address = "8444 South Hill St", EmailAddress = "john@landsberg.com" });
 
-			Repository.AddUserAccount(new UserAccount() { FirstName = "Jane", LastName = "Kniclebocker", EmailAddress = "jane@ogsys.com" });
-			Repository.AddUserAccount(new UserAccount() { FirstName = "Jimmy", LastName = "Hendrix", EmailAddress = "jimmy@ogsys.com" });
-			Repository.AddUserAccount(new UserAccount() { FirstName = "Johnathan", LastName = "Lane", EmailAddress = "john@ogsys.com" });
-			Repository.AddUserAccount(new UserAccount() { FirstName = "Jorge", LastName = "Mendez", EmailAddress = "jorge@ogsys.com" });
-			Repository.AddUserAccount(new UserAccount() { FirstName = "Jade", LastName = "Fire", EmailAddress = "jade@ogsys.com" });
+			Repository.AddUserAccount(new UserAccount() { FirstName = "Jane", LastName = "Kniclebocker", EmailAddress = "jane@ogsys.com", Password="password" });
+			Repository.AddUserAccount(new UserAccount() { FirstName = "Jimmy", LastName = "Hendrix", EmailAddress = "jimmy@ogsys.com", Password = "password" });
+			Repository.AddUserAccount(new UserAccount() { FirstName = "Johnathan", LastName = "Lane", EmailAddress = "john@ogsys.com", Password = "password" });
+			Repository.AddUserAccount(new UserAccount() { FirstName = "Jorge", LastName = "Mendez", EmailAddress = "jorge@ogsys.com", Password = "password" });
+			Repository.AddUserAccount(new UserAccount() { FirstName = "Jade", LastName = "Fire", EmailAddress = "jade@ogsys.com", Password = "password" });
 
 			var random = new Random();
 			var customers = Repository.GetAllCustomerIds();

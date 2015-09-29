@@ -40,7 +40,7 @@ namespace MasonOgCRM.WebApp.Controllers
 		[AllowAnonymous]
 		public ActionResult Login()
 		{
-			return View();
+			return View(new LoginAttemptViewModel());
 		}
 
 		[AllowAnonymous]
@@ -61,7 +61,7 @@ namespace MasonOgCRM.WebApp.Controllers
 			}
 			else
 			{
-				return View();
+				return View(new LoginAttemptViewModel() { Message = "Username or password invalid" });
 			}
 		}
 
@@ -70,7 +70,7 @@ namespace MasonOgCRM.WebApp.Controllers
 		public ActionResult Register(UserAccount account)
 		{
 			Repository.AddUserAccount(account);
-			return RedirectToAction(nameof(UserAccountController.Login));
+			return View("RegistrationSuccess");
 		}
 
 		public ActionResult PerformLogout()

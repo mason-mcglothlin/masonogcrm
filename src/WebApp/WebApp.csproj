@@ -291,6 +291,7 @@
     <Content Include="Views\UserAccount\Login.cshtml" />
     <Content Include="Views\UserAccount\Register.cshtml" />
     <Content Include="Views\Shared\_UnauthenticatedLayout.cshtml" />
+    <Content Include="Views\UserAccount\RegistrationSuccess.cshtml" />
     <None Include="Web.Azure Testing.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -336,6 +337,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModels\CustomersIndexViewModel.cs" />
     <Compile Include="ViewModels\LayoutViewModel.cs" />
+    <Compile Include="ViewModels\LoginAttemptViewModel.cs" />
     <Compile Include="ViewModels\LoginSubmitViewModel.cs" />
   </ItemGroup>
   <ItemGroup>

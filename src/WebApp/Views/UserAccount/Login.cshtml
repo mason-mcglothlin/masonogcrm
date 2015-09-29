@@ -1,4 +1,4 @@
-﻿
+﻿@model LoginAttemptViewModel
 @{
     Layout = "~/Views/Shared/_UnauthenticatedLayout.cshtml";
     ViewBag.Title = "Login";
@@ -6,6 +6,8 @@
 
 <h2>OgCRM</h2>
 <h4>Login</h4>
+
+<p class="text-danger">@Model.Message</p>
 
 @using (Html.BeginForm(nameof(UserAccountController.Login), nameof(UserAccountController).RemoveControllerFromName()))
 {
