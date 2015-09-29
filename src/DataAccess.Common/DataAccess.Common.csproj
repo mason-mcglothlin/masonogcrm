@@ -50,6 +50,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="IOgCRMRepository.cs" />
+    <Compile Include="IPasswordHasher.cs" />
+    <Compile Include="PasswordHasher.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

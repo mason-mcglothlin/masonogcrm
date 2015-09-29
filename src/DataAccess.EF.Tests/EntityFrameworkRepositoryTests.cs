@@ -8,6 +8,7 @@ using MasonOgCRM.DataAccess.EF;
 using Moq;
 using MasonOgCRM.DomainModels;
 using System.Data.Entity;
+using MasonOgCRM.DataAccess.Common;
 
 namespace DataAccess.EF.Tests
 {
@@ -18,11 +19,17 @@ namespace DataAccess.EF.Tests
 		Mock<DbSet<Customer>> mockSet;
 		Customer mason;
 
+		private EntityFrameworkRepository CreateRepository()
+		{
+			Mock<IPasswordHasher> hasher = new Mock<IPasswordHasher>();
+			return new EntityFrameworkRepository(dbContext.Object, hasher.Object);
+		}
+
 		[TestFixtureSetUp]
 		public void SetupDbContext()
 		{
 			dbContext = new Mock<IDbContext>();
-			
+
 			mason = new Customer { Id = 2, FirstName = "Mason", LastName = "McGlothlin", Address = "1 Washington Way", CompanyName = "Acme Inc", EmailAddress = "mason@compuserve.com", PhoneNumber = "555-555-5555" };
 
 			var sampleCustomerData = new List<Customer>
@@ -46,7 +53,7 @@ namespace DataAccess.EF.Tests
 		public void FindCustomerById()
 		{
 			//Arrange
-			var repository = new EntityFrameworkRepository(dbContext.Object);
+			var repository = CreateRepository();
 
 			//Act
 			var customer = repository.FindCustomerById(mason.Id);
@@ -61,12 +68,12 @@ namespace DataAccess.EF.Tests
 			Assert.AreEqual(mason.EmailAddress, customer.EmailAddress);
 			Assert.AreEqual(mason.PhoneNumber, customer.PhoneNumber);
 		}
-		
+
 		[Test]
 		public void AddCustomer()
 		{
 			//Arrange
-			var repository = new EntityFrameworkRepository(dbContext.Object);
+			var repository = CreateRepository();
 			var customer = new Customer() { FirstName = "Larry", LastName = "Hughes" };
 
 			//Act
@@ -82,7 +89,7 @@ namespace DataAccess.EF.Tests
 		public void DeleteCustomer()
 		{
 			//Arrange
-			var repository = new EntityFrameworkRepository(dbContext.Object);
+			var repository = CreateRepository();
 
 			//Act
 			repository.DeleteCustomer(mason.Id);
@@ -96,7 +103,7 @@ namespace DataAccess.EF.Tests
 		public void GetAllCustomers()
 		{
 			//Arrange
-			var repository = new EntityFrameworkRepository(dbContext.Object);
+			var repository = CreateRepository();
 
 			//Act
 			var customers = repository.GetAllCustomers();
@@ -110,7 +117,7 @@ namespace DataAccess.EF.Tests
 		public void GetAllCustomersByExpression()
 		{
 			//Arrange
-			var repository = new EntityFrameworkRepository(dbContext.Object);
+			var repository = CreateRepository();
 
 			//Act
 			var customers = repository.GetAllCustomers(c => c.CompanyName.Contains("Inc"));

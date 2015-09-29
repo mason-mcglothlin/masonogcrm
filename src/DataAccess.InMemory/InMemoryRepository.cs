@@ -19,6 +19,13 @@ namespace MasonOgCRM.DataAccess.InMemory
 
 		private Random randomNumberGenerator { get; } = new Random(Int32.MaxValue);
 
+		private readonly IPasswordHasher PasswordService;
+
+		public InMemoryRepository(IPasswordHasher passwordHasher)
+		{
+			PasswordService = passwordHasher;
+		}
+
 		public int GetCustomerTotalCount()
 		{
 			return Customers.Count;
@@ -48,6 +55,7 @@ namespace MasonOgCRM.DataAccess.InMemory
 
 		public void AddUserAccount(UserAccount userAccount)
 		{
+			userAccount.Password = PasswordService.CreateHash(userAccount.Password);
 			userAccount.Id = randomNumberGenerator.Next();
 			UserAccounts.Add(userAccount.Id, userAccount);
 		}
@@ -124,6 +132,17 @@ namespace MasonOgCRM.DataAccess.InMemory
 
 		public void UpdateUserAccount(UserAccount userAccount)
 		{
+			if (String.IsNullOrEmpty(userAccount.Password))
+			{
+				//assume password is not being changed, pull the current hash from the db
+				var account = FindUserAccountById(userAccount.Id);
+				userAccount.Password = account.Password;
+			}
+			else
+			{
+				//assume password is being changed
+				userAccount.Password = PasswordService.CreateHash(userAccount.Password);
+			}
 			UserAccounts[userAccount.Id] = userAccount;
 		}
 
@@ -140,9 +159,10 @@ namespace MasonOgCRM.DataAccess.InMemory
 		/// <returns>True if the authentication succeeds, otherwise false.</returns>
 		public bool AuthenticateUser(string emailAddress, string password)
 		{
-			if (UserAccounts.Where(kvp => kvp.Value.EmailAddress==emailAddress).Count() > 0 && UserAccounts.Where(kvp => kvp.Value.EmailAddress == emailAddress).First().Value.Password == password)
+			if (UserAccounts.Where(kvp => kvp.Value.EmailAddress == emailAddress).Count() > 0)
 			{
-				return true;
+				var correctHash = UserAccounts.Where(kvp => kvp.Value.EmailAddress == emailAddress).First().Value.Password;
+				return PasswordService.ValidatePassword(password, correctHash);
 			}
 			else
 			{

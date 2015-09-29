@@ -68,6 +68,7 @@ namespace MasonOgCRM.WebApp.App_Start
 			kernel.BindFilter<LayoutViewModelInjectorAttribute>(FilterScope.Global, 0);
 			kernel.BindFilter<HandleErrorAttribute>(FilterScope.Global, 0);
 			kernel.BindFilter<AuthorizeAttribute>(FilterScope.Global, 0);
+			kernel.Bind<IPasswordHasher>().To<PasswordHasher>();
 
 			if (ConfigurationManager.AppSettings["Repository"] != null)
 			{
@@ -93,7 +94,7 @@ namespace MasonOgCRM.WebApp.App_Start
 		private static void RegisterEFRepository(IKernel kernel)
 		{
 			var dbContext = new EFDBContext("SqlServerLocalDb");
-			kernel.Bind<IOgCRMRepository>().ToMethod((IContext) => new EntityFrameworkRepository(dbContext));
+			kernel.Bind<IOgCRMRepository>().ToMethod((IContext) => new EntityFrameworkRepository(dbContext, new PasswordHasher()));
 		}
 
 		private static void RegisterInMemoryRepository(IKernel kernel)

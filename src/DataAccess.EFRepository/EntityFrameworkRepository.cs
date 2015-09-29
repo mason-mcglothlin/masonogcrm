@@ -21,13 +21,16 @@ namespace MasonOgCRM.DataAccess.EF
 		/// </summary>
 		private readonly IDbContext DBContext;
 
+		private readonly IPasswordHasher PasswordService;
+
 		/// <summary>
 		/// Create a new EntityFrameworkRepository with a connection string.
 		/// </summary>
 		/// <param name="connectionString">Connection string to use to initialize the Entity Framework context.</param>
-		public EntityFrameworkRepository(IDbContext context)
+		public EntityFrameworkRepository(IDbContext context, IPasswordHasher passwordHasher)
 		{
 			DBContext = context;
+			PasswordService = passwordHasher;
 		}
 
 		/// <summary>
@@ -77,6 +80,7 @@ namespace MasonOgCRM.DataAccess.EF
 		/// <returns></returns>
 		public void AddUserAccount(UserAccount userAccount)
 		{
+			userAccount.Password = PasswordService.CreateHash(userAccount.Password);
 			DBContext.UserAccounts.Add(userAccount);
 			DBContext.SaveChanges();
 		}
@@ -233,6 +237,17 @@ namespace MasonOgCRM.DataAccess.EF
 		/// <returns></returns>
 		public void UpdateUserAccount(UserAccount userAccount)
 		{
+			if(String.IsNullOrEmpty(userAccount.Password))
+			{
+				//assume password is not being changed, pull the current hash from the db
+				var account = FindUserAccountById(userAccount.Id);
+				userAccount.Password = account.Password;
+			}
+			else {
+				//assume password is being changed
+				userAccount.Password = PasswordService.CreateHash(userAccount.Password);
+			}
+
 			DBContext.UserAccounts.AddOrUpdate(userAccount);
 			DBContext.SaveChanges();
 		}
@@ -268,7 +283,7 @@ namespace MasonOgCRM.DataAccess.EF
 			{
 				return false;
 			}
-			if (account.Password == password)
+			if (PasswordService.ValidatePassword(password, account.Password))
 			{
 				return true;
 			}

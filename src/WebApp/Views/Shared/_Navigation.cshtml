@@ -13,7 +13,7 @@
                 <div class="logo-element">
                     OgCRM
                 </div>
-            </li>
+            </li>           
             <li class="@Html.IsSelected(action: nameof(HomeController.Index), controller:nameof(HomeController).RemoveControllerFromName())">
                 <a href="@Url.Action(nameof(HomeController.Index), nameof(HomeController).RemoveControllerFromName())"><i class="fa fa-home"></i> <span class="nav-label">Home</span> </a>
             </li>
@@ -39,12 +39,13 @@
                     </li>
                     <li class="@Html.IsSelected(action: nameof(UserAccountController.New), controller: nameof(UserAccountController).RemoveControllerFromName())">
                         <a href="@Url.Action(nameof(UserAccountController.New), nameof(UserAccountController).RemoveControllerFromName())">New</a>
-                    </li>
+                    </li>                    
                 </ul>
             </li>
             <li>
-                <a href="javascript:document.getElementById('logoutForm').submit()"><i class="fa fa-sign-out"></i> <span class="nav-label">@User.Identity.Name - Log off</span></a>
+                <a href="javascript:document.getElementById('logoutForm').submit()"><i class="fa fa-sign-out"></i> <span class="nav-label">Log off</span></a>
             </li>
+            <li>@User.Identity.Name</li>
         </ul>
     </div>
 </nav>

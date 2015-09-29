@@ -28,7 +28,6 @@ namespace MasonOgCRM.DataAccess.EF
 		/// Can be a connection string name or full connection string.</param>
 		public EFDBContext(string connectionString) : base(connectionString) { }
 
-
 		/// <summary>
 		/// Configure EF model primary and foreign keys by overriding DbContext.OnModelCreating
 		/// </summary>
