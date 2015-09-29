@@ -106,8 +106,9 @@
 }
 <script id="notes-template" type="text/x-handlebars-template">
     {{#each notes}}
-    <div class="social-comment">
-        {{Body}} - <strong>{{CreatedByUserName}}</strong>
-    </div>
+    <blockquote>
+        <p>{{Body}}</p>
+        <footer>{{CreatedByUserName}}</footer>
+    </blockquote>
     {{/each}}
 </script>
