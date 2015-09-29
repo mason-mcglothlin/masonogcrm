@@ -16,7 +16,7 @@ namespace DataAccess.EF.Tests
 	public class EntityFrameworkRepositoryTests
 	{
 		Mock<IDbContext> dbContext;
-		Mock<DbSet<Customer>> mockSet;
+		Mock<DbSet<Customer>> mockCustomerSet;
 		Customer mason;
 
 		private EntityFrameworkRepository CreateRepository()
@@ -39,13 +39,13 @@ namespace DataAccess.EF.Tests
 				new Customer { Id = 3, FirstName = "Bobby", LastName = "Tables", Address = "XKCD Street", CompanyName = "Funny Stuff LLC", EmailAddress = "randall@xkcd.net", PhoneNumber = "214-555-5555" },
 			}.AsQueryable();
 
-			mockSet = new Mock<DbSet<Customer>>();
-			mockSet.As<IQueryable<Customer>>().Setup(m => m.Provider).Returns(sampleCustomerData.Provider);
-			mockSet.As<IQueryable<Customer>>().Setup(m => m.Expression).Returns(sampleCustomerData.Expression);
-			mockSet.As<IQueryable<Customer>>().Setup(m => m.ElementType).Returns(sampleCustomerData.ElementType);
-			mockSet.As<IQueryable<Customer>>().Setup(m => m.GetEnumerator()).Returns(sampleCustomerData.GetEnumerator());
-			mockSet.Setup(c => c.Add(It.IsAny<Customer>())).Returns(new Customer()).Verifiable();
-			dbContext.Setup(c => c.Customers).Returns(mockSet.Object);
+			mockCustomerSet = new Mock<DbSet<Customer>>();
+			mockCustomerSet.As<IQueryable<Customer>>().Setup(m => m.Provider).Returns(sampleCustomerData.Provider);
+			mockCustomerSet.As<IQueryable<Customer>>().Setup(m => m.Expression).Returns(sampleCustomerData.Expression);
+			mockCustomerSet.As<IQueryable<Customer>>().Setup(m => m.ElementType).Returns(sampleCustomerData.ElementType);
+			mockCustomerSet.As<IQueryable<Customer>>().Setup(m => m.GetEnumerator()).Returns(sampleCustomerData.GetEnumerator());
+			mockCustomerSet.Setup(c => c.Add(It.IsAny<Customer>())).Returns(new Customer()).Verifiable();
+			dbContext.Setup(c => c.Customers).Returns(mockCustomerSet.Object);
 			dbContext.Setup(c => c.SaveChanges()).Verifiable();
 		}
 
@@ -80,10 +80,23 @@ namespace DataAccess.EF.Tests
 			repository.AddCustomer(customer);
 
 			//Assert
-			mockSet.Verify(c => c.Add(It.IsAny<Customer>()));
+			mockCustomerSet.Verify(c => c.Add(It.IsAny<Customer>()));
 			dbContext.Verify(c => c.SaveChanges());
 		}
 
+		[Test]
+		public void GetCustomerTotalCount()
+		{
+			//Arrange
+			var expectedCount = mockCustomerSet.Object.Count();
+			var repository = CreateRepository();
+
+			//Act
+			var actualCount = repository.GetCustomerTotalCount();
+
+			//Assert
+			Assert.AreEqual(expectedCount, actualCount);
+		}
 
 		[Test]
 		public void DeleteCustomer()
@@ -110,7 +123,7 @@ namespace DataAccess.EF.Tests
 
 			//Assert
 			Assert.IsNotNull(customers);
-			Assert.AreEqual(mockSet.Object.Count(), customers.Count);
+			Assert.AreEqual(mockCustomerSet.Object.Count(), customers.Count);
 		}
 
 		[Test]
@@ -125,6 +138,25 @@ namespace DataAccess.EF.Tests
 			//Assert
 			Assert.IsNotNull(customers);
 			Assert.AreEqual(2, customers.Count);
+		}
+
+		[Test]
+		public void GetAllCustomerIds()
+		{
+			//Arrange
+			var expectedIds = mockCustomerSet.Object.Select(c => c.Id).ToList();
+			var expectedIdCount = expectedIds.Count();
+			var repository = CreateRepository();
+
+			//Act
+			var actualIds = repository.GetAllCustomerIds();
+
+			//Assert
+			Assert.AreEqual(expectedIdCount, expectedIdCount);
+			foreach (var expectedId in expectedIds)
+			{
+				Assert.Contains(expectedId, actualIds);
+			}
 		}
 	}
 }
