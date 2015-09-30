@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Security;
 using MasonOgCRM.DataAccess.Common;
 using MasonOgCRM.DomainModels;
 
@@ -95,7 +96,7 @@ Maecenas vel velit lorem. Cras pharetra turpis sed metus sollicitudin, a fringil
 		/// <summary>
 		/// Removes all customers, notes, and user accounts from the repository.
 		/// </summary>
-		/// <returns>A redirect back to the home page.</returns>
+		/// <returns>A redirect back to the registration page.</returns>
 		public ActionResult PerformEmpty()
 		{
 			foreach (var id in Repository.GetAllCustomerIds())
@@ -112,8 +113,8 @@ Maecenas vel velit lorem. Cras pharetra turpis sed metus sollicitudin, a fringil
 			{
 				Repository.DeleteNote(note.Id);
 			}
-
-			return RedirectToAction(nameof(HomeController.Index));
+			FormsAuthentication.SignOut();
+			return RedirectToAction(nameof(UserAccountController.Register));
 		}
 	}
 }
