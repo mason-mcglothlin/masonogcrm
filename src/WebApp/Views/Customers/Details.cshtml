@@ -68,6 +68,8 @@
 @section Scripts{
     <script src="//cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.3/handlebars.min.js"></script>
     <script>
+        var numNotes = 0;
+
         function SuccessNoteAdd() {
             console.log("Note successfully posted.");
             $("#NoteBody").val("");
@@ -80,13 +82,31 @@
 
         function SuccessRetrieveNotes(data) {
             $("#LoadingImage").hide();
-            console.log('Retrieved: ' + data);
             var html = template({ notes: data });
             $("#NotesDiv").html(html);
-            console.log("Processed HTML: " + html);
+            numNotes = data.length;
+            CheckNoNotes();
+        }
+
+        function CheckNoNotes() {
+            if (numNotes == 0) {
+                $("#NotesDiv").html("<p>There are no notes yet for this customer.</p>")
+            }
         }
 
         var template = null; //only want to compile once
+
+        function DeleteNote(id) {
+            console.log("Deleting note: " + id);
+            $.ajax({
+                url: "@Url.Content("~/api/Notes/")" + id,
+                type: "DELETE"
+            }).success(function () {
+                $("#Note_" + id).fadeOut(300, function () { $(this).remove(); });
+                numNotes = numNotes - 1;
+                CheckNoNotes();
+            });
+        }
 
         $(function () {
             var source = $("#notes-template").html();
@@ -94,7 +114,6 @@
 
             GetAllNotes();
             
-
             $("#SubmitNoteBtn").click(function () {
                 console.log("Submitting note...");
                 var note = { Body: $("#NoteBody").val(), CustomerId: '@Model.Id' };
@@ -106,9 +125,10 @@
 }
 <script id="notes-template" type="text/x-handlebars-template">
     {{#each notes}}
-    <blockquote>
+    <blockquote id="Note_{{Id}}">
         <p>{{Body}}</p>
-        <footer>{{CreatedByUserName}}</footer>
+        <span class="pull-right"><button type="button" class="btn btn-danger" title="Delete Note" onclick="DeleteNote({{Id}})"><i class="fa fa-remove"></i> Delete</button></span>
+        <footer>{{CreatedByUserName}} </footer>
     </blockquote>
     {{/each}}
 </script>
