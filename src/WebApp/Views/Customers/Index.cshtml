@@ -16,8 +16,8 @@
 }
 else
 {
-    <div class="table-responsive">
-        <table class="table table-striped">
+    <div id="CustomersDiv" class="table-responsive">
+        <table id="CustomersTable" class="table table-striped">
             <tr>
                 <th>
                     @Html.DisplayNameFor(model => model.AllCustomersList[0].FirstName)
@@ -42,7 +42,7 @@ else
 
             @foreach (var customer in Model.AllCustomersList)
             {
-            <tr>
+            <tr id="Customer_@customer.Id">
                 <td>
                     @Html.DisplayFor(modelItem => customer.FirstName)
                 </td>
@@ -62,9 +62,29 @@ else
                     @Html.DisplayFor(modelItem => customer.PhoneNumber)
                 </td>
                 <td>
-                    <a href="@Url.Action(nameof(CustomersController.Details), nameof(CustomersController).RemoveControllerFromName(), new { id = customer.Id })" class="btn btn-info btn-sm">Details</a>
+                    <a href="@Url.Action(nameof(CustomersController.Details), nameof(CustomersController).RemoveControllerFromName(), new { id = customer.Id })" class="btn btn-info btn-sm">Details</a> |
+                    <button type="button" class="btn btn-danger btn-sm" onclick="DeleteCustomer(@customer.Id)">Delete</button>
                 </td>
             </tr>}
         </table>
     </div>
+}
+@section Scripts{
+    <script>
+        function DeleteCustomer(id) {
+            console.log("Deleting customer: " + id);
+            $.ajax({
+                url: "@Url.Content("~/api/Customers/")" + id,
+                type: "DELETE"
+            }).success(function () {
+                $("#Customer_" + id).fadeOut(300, function () {
+                    $(this).remove();
+                    if ($("#CustomersTable tr").length == 1) {
+                        $("#CustomersTable").fadeOut(300, function () { $(this).remove(); });
+                        $("#CustomersDiv").removeClass("table-responsive").html("<p>There are no customers in the database.</p>");
+                    }
+                });
+            });
+        }
+    </script>
 }
