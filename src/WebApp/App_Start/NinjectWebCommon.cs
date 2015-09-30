@@ -81,7 +81,11 @@ namespace MasonOgCRM.WebApp.App_Start
 				}
 				else if (ConfigurationManager.AppSettings["Repository"] == "SqlServerLocalDatabase")
 				{
-					RegisterEFRepository(kernel);
+					RegisterEFRepository(kernel, "SqlServerLocalDb");
+				}
+				else if (ConfigurationManager.AppSettings["Repository"] == "SqlServerAzure")
+				{
+					RegisterEFRepository(kernel, "SqlServerAzure");
 				}
 				else
 				{
@@ -98,9 +102,9 @@ namespace MasonOgCRM.WebApp.App_Start
 		/// Register an Entity Framework repository to resolve the IOgCRMRepository dependency.
 		/// </summary>
 		/// <param name="kernel">Kernel to register the dependency with.</param>
-		private static void RegisterEFRepository(IKernel kernel)
+		private static void RegisterEFRepository(IKernel kernel, string connectionStringName)
 		{
-			var dbContext = new EFDBContext("SqlServerLocalDb");
+			var dbContext = new EFDBContext(connectionStringName);
 			kernel.Bind<IOgCRMRepository>().ToMethod((IContext) => new EntityFrameworkRepository(dbContext, new PasswordHasher()));
 		}
 

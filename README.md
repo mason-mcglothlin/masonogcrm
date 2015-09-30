@@ -1,10 +1,12 @@
 # masonogcrm CRM demo application
 
 This application is a demo application that demonstrates some of my software development capabilities. 
-A live version with an In Memory database that resets when the AppDomain recycles is hosted 
-[on Azure](http://ogcrm.azurewebsites.net/). When run locally (not in Azure) SqlServer's local database is used.
+A live version is hosted [on Azure](http://ogcrm.azurewebsites.net/).
 
 This application was built with a number of different tools. I'll describe most of them, my familiarity with them, why I chose them.
+
+### C# 6
+C# 6 didn't have a big new feature like Linq, Async/Await, or generics. But it did introduct a number of useful little pieces of syntatical helpers and tiny features. When creating hyperlinks to webpages in my Razor views, I made extensive use of the `nameof()` function to get strongly typed references to action methods and controllers. This actually saved me once when I renamed a function and forgot to go update the links - I hit a compilation exception and was quickly able to locate the problem and fix.
 
 ### ASP.NET MVC
 I orginally began my development career with ASP.NET Web Forms, but I wish I had been exposed to MVC much sooner. MVC plays nicely with the web, and provides a clean way of interacting with MVC. Although I'm fairly new to MVC, I've come to greatly prefer it over Web Forms for server side web development work. 
