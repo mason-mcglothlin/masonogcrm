@@ -1,7 +1,6 @@
 # masonogcrm CRM demo application
 
 This application is a demo application that demonstrates some of my software development capabilities. 
-A live version is hosted [on Azure](http://ogcrm.azurewebsites.net/).
 
 This application was built with a number of different tools. I'll describe most of them, my familiarity with them, why I chose them.
 
